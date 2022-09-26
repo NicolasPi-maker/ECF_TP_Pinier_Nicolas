@@ -1,0 +1,244 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\FranchiseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: FranchiseRepository::class)]
+class Franchise
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 120)]
+    private ?string $client_name = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $client_address = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $url = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $logo_url = null;
+
+    #[ORM\Column(length: 120, nullable: true)]
+    private ?string $technical_contact = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $commercial_contact = null;
+
+    #[ORM\Column(length: 120)]
+    private ?string $short_description = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $full_description = null;
+
+    #[ORM\Column]
+    private ?bool $is_active = null;
+
+    #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: User::class)]
+    private Collection $user_id;
+
+    #[ORM\OneToMany(mappedBy: 'franchise_id', targetEntity: Structure::class)]
+    private Collection $structures;
+
+    #[ORM\ManyToOne(inversedBy: 'franchise_id')]
+    private ?GlobalPermissions $globalPermissions = null;
+
+    public function __construct()
+    {
+        $this->user_id = new ArrayCollection();
+        $this->structures = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getClientName(): ?string
+    {
+        return $this->client_name;
+    }
+
+    public function setClientName(string $client_name): self
+    {
+        $this->client_name = $client_name;
+
+        return $this;
+    }
+
+    public function getClientAddress(): ?string
+    {
+        return $this->client_address;
+    }
+
+    public function setClientAddress(string $client_address): self
+    {
+        $this->client_address = $client_address;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): self
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getLogoUrl(): ?string
+    {
+        return $this->logo_url;
+    }
+
+    public function setLogoUrl(?string $logo_url): self
+    {
+        $this->logo_url = $logo_url;
+
+        return $this;
+    }
+
+    public function getTechnicalContact(): ?string
+    {
+        return $this->technical_contact;
+    }
+
+    public function setTechnicalContact(?string $technical_contact): self
+    {
+        $this->technical_contact = $technical_contact;
+
+        return $this;
+    }
+
+    public function getCommercialContact(): ?string
+    {
+        return $this->commercial_contact;
+    }
+
+    public function setCommercialContact(?string $commercial_contact): self
+    {
+        $this->commercial_contact = $commercial_contact;
+
+        return $this;
+    }
+
+    public function getShortDescription(): ?string
+    {
+        return $this->short_description;
+    }
+
+    public function setShortDescription(string $short_description): self
+    {
+        $this->short_description = $short_description;
+
+        return $this;
+    }
+
+    public function getFullDescription(): ?string
+    {
+        return $this->full_description;
+    }
+
+    public function setFullDescription(string $full_description): self
+    {
+        $this->full_description = $full_description;
+
+        return $this;
+    }
+
+    public function isIsActive(): ?bool
+    {
+        return $this->is_active;
+    }
+
+    public function setIsActive(bool $is_active): self
+    {
+        $this->is_active = $is_active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUserId(): Collection
+    {
+        return $this->user_id;
+    }
+
+    public function addUserId(User $userId): self
+    {
+        if (!$this->user_id->contains($userId)) {
+            $this->user_id->add($userId);
+            $userId->setFranchise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserId(User $userId): self
+    {
+        if ($this->user_id->removeElement($userId)) {
+            // set the owning side to null (unless already changed)
+            if ($userId->getFranchise() === $this) {
+                $userId->setFranchise(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Structure>
+     */
+    public function getStructures(): Collection
+    {
+        return $this->structures;
+    }
+
+    public function addStructure(Structure $structure): self
+    {
+        if (!$this->structures->contains($structure)) {
+            $this->structures->add($structure);
+            $structure->setFranchiseId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStructure(Structure $structure): self
+    {
+        if ($this->structures->removeElement($structure)) {
+            // set the owning side to null (unless already changed)
+            if ($structure->getFranchiseId() === $this) {
+                $structure->setFranchiseId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getGlobalPermissions(): ?GlobalPermissions
+    {
+        return $this->globalPermissions;
+    }
+
+    public function setGlobalPermissions(?GlobalPermissions $globalPermissions): self
+    {
+        $this->globalPermissions = $globalPermissions;
+
+        return $this;
+    }
+}

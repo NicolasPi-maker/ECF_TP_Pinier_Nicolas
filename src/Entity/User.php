@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,6 +29,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $last_connexion = null;
+
+    #[ORM\ManyToOne(inversedBy: 'user_id')]
+    private ?Franchise $franchise = null;
+
+    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Structure::class)]
+    private Collection $structures;
+
+    public function __construct()
+    {
+        $this->structures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -95,5 +112,59 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getLastConnexion(): ?\DateTimeInterface
+    {
+        return $this->last_connexion;
+    }
+
+    public function setLastConnexion(?\DateTimeInterface $last_connexion): self
+    {
+        $this->last_connexion = $last_connexion;
+
+        return $this;
+    }
+
+    public function getFranchise(): ?Franchise
+    {
+        return $this->franchise;
+    }
+
+    public function setFranchise(?Franchise $franchise): self
+    {
+        $this->franchise = $franchise;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Structure>
+     */
+    public function getStructures(): Collection
+    {
+        return $this->structures;
+    }
+
+    public function addStructure(Structure $structure): self
+    {
+        if (!$this->structures->contains($structure)) {
+            $this->structures->add($structure);
+            $structure->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStructure(Structure $structure): self
+    {
+        if ($this->structures->removeElement($structure)) {
+            // set the owning side to null (unless already changed)
+            if ($structure->getUserId() === $this) {
+                $structure->setUserId(null);
+            }
+        }
+
+        return $this;
     }
 }

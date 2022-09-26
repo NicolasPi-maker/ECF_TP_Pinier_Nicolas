@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+
+body {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  min-height: 99vh;
+  width: 100vw;
+  font-family: 'Prompt', sans-serif;
+  background: linear-gradient(lightcoral, lightsalmon);
+}
+
+.from-wrapper, .form-fields {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.from-wrapper > * {
+  margin: 1em;
+}
+
+.branding-logo {
+  border-radius: 50%;
+  min-width: 175px;
+  margin-right: 0.5em;
+}
+
+.form-title {
+  font-size: 5em;
+  color: white;
+  margin-bottom: 2em;
+  display: flex;
+  align-items: center;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4em;
+
+}
+
+.form-field > label {
+  margin-bottom: 0.3em;
+  color: white;
+  font-size: 3em;
+}
+
+.form-field > input {
+  border-radius: 20px;
+  border-color: lightsalmon;
+  min-width: 80vw;
+  min-height: 2em;
+  font-size: 2em;
+}
+
+.form-error {
+  transition: ease-in .2s;
+  text-align: center;
+  color: white;
+  font-size: 2.5em;
+  width: 80vw;
+}
+
+.form-button {
+  width: 90%;
+  height: 2.5em;
+  border-radius: 50px;
+  border: none;
+  font-size: 2.5em;
+  background-color: rgb(255, 107, 129, 0.5);
+  color: whitesmoke;
+  font-weight: bold;
+  margin-bottom: 4em;
+}
+

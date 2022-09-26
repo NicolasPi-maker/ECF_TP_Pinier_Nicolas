@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+
+body {
+  font-family: 'Prompt', sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.branding-logo {
+  border-radius: 50%;
+  min-width: 175px;
+  display: flex;
+  font-size: 3.5em;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+
+/* Sidenav menu */
+.sidenav {
+  transition: ease-in 0.4s;
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  right: -250px;
+  background: linear-gradient(lightcoral, lightsalmon);
+  padding-top: 60px;
+}
+
+/* Sidenav menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 2em;
+  font-family: 'Baloo Chettan 2', cursive;
+  color: whitesmoke;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  transition: ease-in 0.2s;
+  color: #111;
+}
+
+.sidenav ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 2em;
+}
+
+/* Active class */
+.sidenav.active {
+  transition: ease-in 0.4s;
+  right: 0;
+}
+
+/* Close btn */
+.sidenav .close {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 4em;
+}
+
+/* Icône burger */
+.burger-icon span {
+  display: block;
+  height: 6px;
+  background-color: black;
+  margin: 10px 2.5em;
+}
+
+#span-top {
+  width: 60px;
+}
+
+#span-mid {
+  width: 45px;
+}
+
+#span-bot {
+  width: 30px;
+}
+
+.link-navbar {
+  display: none;
+}
+
+@media screen and (min-width: 1160px) {
+  #navigation-menu {
+    display: none;
+  }
+
+  .link-navbar {
+    display: flex;
+  }
+
+  .nav-links {
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-links > * {
+    margin-right: 3em;
+    font-size: 1.25em;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li > a{
+    transition: ease-in .4s;
+    text-decoration: none;
+    color: black;
+  }
+
+  li > a:hover {
+    transition: ease-in .2s;
+    color: lightcoral
+  }
+}

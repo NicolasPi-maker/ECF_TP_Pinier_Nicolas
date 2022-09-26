@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title%}JustSport - Accueil {% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/default.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+<header>
+    <div class="branding-logo">
+        <img src="{{ asset('uploads/assets/branding_logo.jpg') }}" alt="welcome background image" class="branding-logo"/>
+        JustSport
+    </div>
+    <nav>
+        <div id="navigation-menu">
+            <div id="mySidenav" class="sidenav">
+                <a id="closeBtn" href="#" class="close">×</a>
+                <ul>
+                    <li><a href="/about">Franchise</a></li>
+                    <li><a href="/contact">Structure</a></li>
+                    {% if app.user %}
+                        <li><a href="{{ path('app_logout') }}">Deconnexion</a></li>
+                    {% else %}
+                        <li><a href="/login">Connexion</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div id="burger-menu">
+                <a href="#" id="openBtn">
+                      <span class="burger-icon">
+                        <span id="span-top"></span>
+                        <span id="span-mid"></span>
+                        <span id="span-bot"></span>
+                      </span>
+                </a>
+            </div>
+        </div>
+        <div class="link-navbar">
+            <ul class="nav-links">
+                <li><a href="/franchise">Franchise</a></li>
+                <li><a href="/structure">Structure</a></li>
+                {% if app.user %}
+                    <li><a href="{{ path('app_logout') }}">Deconnexion</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
+    {% block javascripts %}
+        <script src="{{ asset('js/burgerMenu.js') }}"></script>
+    {% endblock %}
+{% endblock %}

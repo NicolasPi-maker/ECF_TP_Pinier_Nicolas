@@ -63,4 +63,21 @@ class FranchiseRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+      public function getAll(): array
+      {
+        return $this->createQueryBuilder('f')
+          ->getQuery()
+          ->getArrayResult()
+          ;
+      }
+
+      public function franchiseFiltered($filter = null): array
+      {
+        return $this->createQueryBuilder('f')
+          ->where('f.is_active = :filter')
+          ->setParameter('filter', $filter)
+          ->getQuery()
+          ->getArrayResult()
+        ;
+      }
 }

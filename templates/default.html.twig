@@ -17,8 +17,10 @@
             <div id="mySidenav" class="sidenav">
                 <a id="closeBtn" href="#" class="close">×</a>
                 <ul>
-                    <li><a href="/about">Franchise</a></li>
-                    <li><a href="/contact">Structure</a></li>
+                    <li><a href="/staff">Franchise</a></li>
+                    <li><a href="/staff/create_franchise">Ajouter une franchise</a></li>
+                    <li><a href="/staff/structures">Structure</a></li>
+                    <li><a href="/staff/create_structure">Ajouter une structure</a></li>
                     {% if app.user %}
                         <li><a href="{{ path('app_logout') }}">Deconnexion</a></li>
                     {% else %}
@@ -39,8 +41,8 @@
         </div>
         <div class="link-navbar">
             <ul class="nav-links">
-                <li><a href="/franchise">Franchise</a></li>
-                <li><a href="/structure">Structure</a></li>
+                <li><a href="/staff">Franchise</a></li>
+                <li><a href="/staff/structure">Structure</a></li>
                 {% if app.user %}
                     <li><a href="{{ path('app_logout') }}">Deconnexion</a></li>
                 {% endif %}
@@ -48,6 +50,9 @@
         </div>
     </nav>
 </header>
+    {% block content %}
+
+    {% endblock%}
     {% block javascripts %}
         <script src="{{ asset('js/burgerMenu.js') }}"></script>
     {% endblock %}

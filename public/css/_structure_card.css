@@ -1,0 +1,27 @@
+article {
+  position: relative;
+}
+
+.structure-logo {
+  width: 300px;
+  height: 300px;
+  border-radius: 25px;
+}
+
+.structure-main-info {
+  display: flex;
+  align-items: center;
+}
+
+.structure-main-info > * {
+  margin: 1em;
+}
+
+
+.structure-text {
+  font-size: 1.75em;
+}
+
+.structure-text > a {
+  text-decoration: none;
+}

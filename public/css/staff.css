@@ -1,0 +1,52 @@
+#checkbox-filter {
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
+}
+
+#filter-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+#filters {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 75%;
+}
+
+#checkbox-filter > * {
+  margin: 1em;
+  display: flex;
+  align-items: center;
+  font-size: 1.25em;
+}
+
+#search-filter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#search-filter > input {
+  font-size: 2em;
+  border-radius: 35px;
+  width: 100%;
+  height: 2em;
+  padding: 0.25em;
+}
+
+#filter {
+  width: 2.75em;
+  height: 2.75em;
+}
+
+.main-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+}
+
+

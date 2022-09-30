@@ -1,0 +1,177 @@
+{% extends 'default.html.twig' %}
+
+{% block title %}Modifier une franchise{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/default.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/franchise_form.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h1 class="main-title">Modifier la structure {{ structure.getStructureName }}</h1>
+        <section>
+            {{ form_start(form) }}
+            <div class="form-field">
+                <div class="form-label">
+                    {{ form_label(form.structure_name, null, {
+                        label: 'Nom de la structure'
+                    }) }}
+                </div>
+                <div class="form-input">
+                    {{ form_widget(form.structure_name)}}
+                </div>
+            </div>
+            <div class="form-field">
+                <div class="form-label">
+                    {{ form_label(form.structure_address, null, {
+                        label: 'Adresse de la structure'
+                    }) }}
+                </div>
+                <div class="form-input">
+                    {{ form_widget(form.structure_address)}}
+                </div>
+            </div>
+            <div class="form-field">
+                <div class="form-label">
+                    {{ form_label(form.url, null, {
+                        label: 'Url de la franchise'
+                    }) }}
+                </div>
+                <div class="form-input">
+                    {{ form_widget(form.url)}}
+                </div>
+            </div>
+            <div class="form-field">
+                <div class="form-label">
+                    {{ form_label(form.manager_name, null, {
+                        label: 'Nom du manager'
+                    }) }}
+                </div>
+                <div class="form-input">
+                    {{ form_widget(form.manager_name)}}
+                </div>
+            </div>
+            <div class="form-field">
+                <div class="form-label">
+                    {{ form_label(form.user_id, null, {
+                        label: 'Adresse email du manager'
+                    }) }}
+                </div>
+                <div class="form-input">
+                    {{ form_widget(form.user_id)}}
+                </div>
+            </div>
+            <div class="form-field">
+                <div class="form-label">
+                    {{ form_label(form.logo_url, null, {
+                        label: 'Logo de la structure'
+                    }) }}
+                </div>
+                <div class="form-input">
+                    {{ form_widget(form.logo_url)}}
+                </div>
+            </div>
+            <div class="form-field">
+                <div class="form-label">
+                    {{ form_label(form.is_active, null, {
+                        label: 'Active/Non Active'
+                    }) }}
+                </div>
+                <div class="form-input slider-block">
+                    <label class="switch">
+                        {{ form_widget(form.is_active, {'attr': {'class': 'isActive'}})}}
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <section>
+                <h2>Permissions</h2>
+                <div class="form-field form-permissions">
+                    <div class="form-label">
+                        {{ form_label(form.sell_drink, null, {
+                            label: 'Vente de boisson'
+                        }) }}
+                    </div>
+                    <div class="form-input slider-block">
+                        <label class="switch">
+                            {{ form_widget(form.sell_drink, {'attr': {'class': 'isActive'}})}}
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-field form-permissions">
+                    <div class="form-label">
+                        {{ form_label(form.manage_schedule, null, {
+                            label: 'Gestion du planning'
+                        }) }}
+                    </div>
+                    <div class="form-input slider-block">
+                        <label class="switch">
+                            {{ form_widget(form.manage_schedule, {'attr': {'class': 'isActive'}})}}
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-field form-permissions">
+                    <div class="form-label">
+                        {{ form_label(form.create_newsletter, null, {
+                            label: 'Création de Newsletter'
+                        }) }}
+                    </div>
+                    <div class="form-input slider-block">
+                        <label class="switch">
+                            {{ form_widget(form.create_newsletter, {'attr': {'class': 'isActive'}})}}
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-field form-permissions">
+                    <div class="form-label">
+                        {{ form_label(form.add_promotion, null, {
+                            label: 'Créer une promotion'
+                        }) }}
+                    </div>
+                    <div class="form-input slider-block">
+                        <label class="switch">
+                            {{ form_widget(form.add_promotion, {'attr': {'class': 'isActive'}})}}
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-field form-permissions">
+                    <div class="form-label">
+                        {{ form_label(form.create_event, null, {
+                            label: 'Créer un évenement'
+                        }) }}
+                    </div>
+                    <div class="form-input slider-block">
+                        <label class="switch">
+                            {{ form_widget(form.create_event, {'attr': {'class': 'isActive'}})}}
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-field form-permissions">
+                    <div class="form-label">
+                        {{ form_label(form.sell_food, null, {
+                            label: 'Vendre de la nouriture'
+                        }) }}
+                    </div>
+                    <div class="form-input slider-block">
+                        <label class="switch">
+                            {{ form_widget(form.sell_food, {'attr': {'class': 'isActive'}})}}
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <div class="button-wrapper">
+                <button class="form-button" type="submit">
+                    Modifier
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </section>
+    </main>
+{% endblock %}

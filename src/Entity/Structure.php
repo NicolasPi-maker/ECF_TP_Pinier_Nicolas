@@ -22,7 +22,7 @@ class Structure
     #[ORM\Column(length: 120, nullable: true)]
     private ?string $manager_name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $logo_url = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -37,8 +37,23 @@ class Structure
     #[ORM\ManyToOne(inversedBy: 'structures')]
     private ?User $user_id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'structure_id')]
-    private ?StructurePermissions $structurePermissions = null;
+    #[ORM\Column(nullable: true)]
+    private ?bool $sell_drink = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $manage_schedule = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $create_newsletter = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $create_event = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $add_promotion = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $sell_food = null;
 
     public function getId(): ?int
     {
@@ -141,14 +156,74 @@ class Structure
         return $this;
     }
 
-    public function getStructurePermissions(): ?StructurePermissions
+    public function isSellDrink(): ?bool
     {
-        return $this->structurePermissions;
+        return $this->sell_drink;
     }
 
-    public function setStructurePermissions(?StructurePermissions $structurePermissions): self
+    public function setSellDrink(?bool $sell_drink): self
     {
-        $this->structurePermissions = $structurePermissions;
+        $this->sell_drink = $sell_drink;
+
+        return $this;
+    }
+
+    public function isManageSchedule(): ?bool
+    {
+        return $this->manage_schedule;
+    }
+
+    public function setManageSchedule(?bool $manage_schedule): self
+    {
+        $this->manage_schedule = $manage_schedule;
+
+        return $this;
+    }
+
+    public function isCreateNewsletter(): ?bool
+    {
+        return $this->create_newsletter;
+    }
+
+    public function setCreateNewsletter(?bool $create_newsletter): self
+    {
+        $this->create_newsletter = $create_newsletter;
+
+        return $this;
+    }
+
+    public function isCreateEvent(): ?bool
+    {
+        return $this->create_event;
+    }
+
+    public function setCreateEvent(?bool $create_event): self
+    {
+        $this->create_event = $create_event;
+
+        return $this;
+    }
+
+    public function isAddPromotion(): ?bool
+    {
+        return $this->add_promotion;
+    }
+
+    public function setAddPromotion(?bool $add_promotion): self
+    {
+        $this->add_promotion = $add_promotion;
+
+        return $this;
+    }
+
+    public function isSellFood(): ?bool
+    {
+        return $this->sell_food;
+    }
+
+    public function setSellFood(?bool $sell_food): self
+    {
+        $this->sell_food = $sell_food;
 
         return $this;
     }

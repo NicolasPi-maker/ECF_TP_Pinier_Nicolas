@@ -2,6 +2,11 @@ let sidenav = document.getElementById("mySidenav");
 let openBtn = document.getElementById("openBtn");
 let closeBtn = document.getElementById("closeBtn");
 
+submitForms = function(){
+    document.getElementById("franchiseform").submit();
+    document.getElementById("permissionsform").submit();
+}
+
 /* Set the width of the side navigation to 250px */
 function openNav() {
     sidenav.classList.add("active");

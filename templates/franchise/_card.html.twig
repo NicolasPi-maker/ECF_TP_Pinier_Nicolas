@@ -1,0 +1,46 @@
+{% block stylesheets %}
+    <link href="{{ asset('css/default.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/staff.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% for franchise in franchises %}
+    <article class="main-wrapper">
+        <section class="franchise-main-info">
+            <img src="{{asset('uploads/import/'~ franchise.logo_url )}}" alt="franchise logo branding" class="franchise-logo">
+            <div class="franchise-text">
+                <h3>{{ franchise.client_name }}</h3>
+                <p class="franchise_address">{{ franchise.client_address }}</p>
+                <p>{{ franchise.short_description }}</p>
+                <a href="{{ franchise.url }}">{{ franchise.url }}</a>
+            </div>
+        </section>
+        <section class="franchise-more-info">
+            <div class="form-input slider-block">
+                <label class="switch">
+                    <input type="checkbox" class="switch" value="{{ franchise.is_active }}" id="{{ franchise.id }}">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <button type="button" class="btn-see-more">
+                <a href="/staff/franchise/{{ franchise.id }}">Consulter</a>
+            </button>
+        </section>
+        <a href="/staff/edit/franchise/{{ franchise.id }}">
+        <div class="edit-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3.5em" height="3.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
+                <path fill="#c5b62f" d="M832 512a32 32 0 1 1 64 0v352a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V160a32 32 0 0 1 32-32h352a32 32 0 0 1 0 64H192v640h640V512z"/>
+                <path fill="#c5b62f" d="m469.952 554.24l52.8-7.552L847.104 222.4a32 32 0 1 0-45.248-45.248L477.44 501.44l-7.552 52.8zm422.4-422.4a96 96 0 0 1 0 135.808l-331.84 331.84a32 32 0 0 1-18.112 9.088L436.8 623.68a32 32 0 0 1-36.224-36.224l15.104-105.6a32 32 0 0 1 9.024-18.112l331.904-331.84a96 96 0 0 1 135.744 0z"/>
+            </svg>
+        </div>
+        </a>
+        <a href="staff/delete/franchise/{{ franchise.id }}">
+            <div class="delete-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="3.5em" height="3.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                    <g fill="none" stroke="#df9a9a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                        <path d="m10.25 5.75l-4.5 4.5m0-4.5l4.5 4.5"/><circle cx="8" cy="8" r="6.25"/>
+                    </g>
+                </svg>
+            </div>
+        </a>
+    </article>
+{% endfor %}

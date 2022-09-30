@@ -1,0 +1,78 @@
+<div class="form-field form-permissions">
+    <div class="form-label">
+        {{ form_label(form.sell_drink, null, {
+            label: 'Vente de boisson'
+        }) }}
+    </div>
+    <div class="form-input slider-block">
+        <label class="switch">
+            {{ form_widget(form.sell_drink, {'attr': {'class': 'isActive'}})}}
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>
+<div class="form-field form-permissions">
+    <div class="form-label">
+        {{ form_label(form.manage_schedule, null, {
+            label: 'Gestion du planning'
+        }) }}
+    </div>
+    <div class="form-input slider-block">
+        <label class="switch">
+            {{ form_widget(form.manage_schedule, {'attr': {'class': 'isActive'}})}}
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>
+<div class="form-field form-permissions">
+    <div class="form-label">
+        {{ form_label(form.create_newsletter, null, {
+            label: 'Création de Newsletter'
+        }) }}
+    </div>
+    <div class="form-input slider-block">
+        <label class="switch">
+            {{ form_widget(form.create_newsletter, {'attr': {'class': 'isActive'}})}}
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>
+<div class="form-field form-permissions">
+    <div class="form-label">
+        {{ form_label(form.add_promotion, null, {
+            label: 'Créer une promotion'
+        }) }}
+    </div>
+    <div class="form-input slider-block">
+        <label class="switch">
+            {{ form_widget(form.add_promotion, {'attr': {'class': 'isActive'}})}}
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>
+<div class="form-field form-permissions">
+    <div class="form-label">
+        {{ form_label(form.create_event, null, {
+            label: 'Créer un évenement'
+        }) }}
+    </div>
+    <div class="form-input slider-block">
+        <label class="switch">
+            {{ form_widget(form.create_event, {'attr': {'class': 'isActive'}})}}
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>
+<div class="form-field form-permissions">
+    <div class="form-label">
+        {{ form_label(form.sell_food, null, {
+            label: 'Vendre de la nouriture'
+        }) }}
+    </div>
+    <div class="form-input slider-block">
+        <label class="switch">
+            {{ form_widget(form.sell_food, {'attr': {'class': 'isActive'}})}}
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>

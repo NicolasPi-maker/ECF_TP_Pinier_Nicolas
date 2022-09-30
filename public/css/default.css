@@ -25,11 +25,11 @@ header {
 .sidenav {
   transition: ease-in 0.4s;
   height: 100%;
-  width: 250px;
+  width: 300px;
   position: fixed;
   z-index: 999;
   top: 0;
-  right: -250px;
+  right: -300px;
   background: linear-gradient(lightcoral, lightsalmon);
   padding-top: 60px;
 }
@@ -39,9 +39,9 @@ header {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 2em;
-  font-family: 'Baloo Chettan 2', cursive;
   color: whitesmoke;
   display: block;
+  margin-bottom: 1em;
   transition: 0.3s;
 }
 
@@ -58,7 +58,7 @@ header {
 
 /* Active class */
 .sidenav.active {
-  transition: ease-in 0.4s;
+  transition: ease-in 0.2s;
   right: 0;
 }
 

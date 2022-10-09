@@ -22,7 +22,13 @@ class AdminController extends AbstractController
   #[Route(path: '/staff', name: 'staff')]
   public function index(FranchiseRepository $franchiseRepository, Request $request): Response
   {
+    $isFirstConnexion = $this->setLastConnexion();
+
     $franchises = $franchiseRepository->getAll();
+
+    if(isset($_POST['btn-switch-active'])) {
+      $this->updateFranchiseActive();
+    }
 
     if($request->get('ajax')) {
       if($request->get('filter') === 'all') {
@@ -31,15 +37,55 @@ class AdminController extends AbstractController
         $filter = $request->get('filter');
         $franchises = $franchiseRepository->franchiseFiltered($filter);
       }
+      if($request->get('search-filter') !== null) {
+        $searchFilter = $request->get('search-filter');
+        $franchises = $franchiseRepository->franchiseFilteredBySearch($searchFilter);
+      }
       return new JsonResponse([
         'content'=> $this->renderView('franchise/_card.html.twig', [
           'franchises' => $franchises,
         ])
       ]);
     }
-
     return $this->render('admin/admin.html.twig', [
       'franchises' => $franchises,
+      'isFirstConnexion' => $isFirstConnexion,
     ]);
+
+  }
+
+  public function updateFranchiseActive()
+  {
+    $franchiseRepo = $this->em->getRepository(Franchise::class);
+
+    if(isset($_POST['franchiseId'])) {
+      $currentFranchise = $franchiseRepo->findOneBy(['id' => $_POST['franchiseId']]);
+      $currentFranchise->setIsActive(!$currentFranchise->isIsActive());
+
+      $this->em->persist($currentFranchise);
+      $this->em->flush();
+
+      return $this->redirectToRoute('staff');
+    }
+  }
+
+  public function setLastConnexion()
+  {
+    $user = $this->getUser();
+
+    if($user->getLastConnexion() !== null) {
+      $user->setLastConnexion(new \DateTime());
+
+      $this->em->persist($user);
+      $this->em->flush($user);
+
+      return false;
+    }
+    $user->setLastConnexion(new \DateTime());
+
+    $this->em->persist($user);
+    $this->em->flush($user);
+
+    return true;
   }
 }

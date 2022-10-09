@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title%}JustSport{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/unactivated.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+    <main>
+        {% if franchise %}
+            <h1>En attente d'activation</h1>
+            <div>
+                <p>Votre franchise n'est pas <span class="highlight-active">active</span>.</p>
+                <p>Veuillez contacter notre service franchisé pour plus d'information</p>
+            </div>
+            <a href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M19 11H7.14l3.63-4.36a1 1 0 1 0-1.54-1.28l-5 6a1.19 1.19 0 0 0-.09.15c0 .05 0 .08-.07.13A1 1 0 0 0 4 12a1 1 0 0 0 .07.36c0 .05 0 .08.07.13a1.19 1.19 0 0 0 .09.15l5 6A1 1 0 0 0 10 19a1 1 0 0 0 .64-.23a1 1 0 0 0 .13-1.41L7.14 13H19a1 1 0 0 0 0-2Z"/>
+                </svg>
+                <p>Retour à la page de connexion</p>
+            </a>
+        {% endif%}
+        {% if structure %}
+            <h1>En attente d'activation</h1>
+            <div>
+                <p>Votre structure n'est pas <span class="highlight-active">active</span>.</p>
+                <p>veuillez contacter notre service structure ou vous rapprocher de votre franchise pour plus d'information</p>
+            </div>
+            <a href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M19 11H7.14l3.63-4.36a1 1 0 1 0-1.54-1.28l-5 6a1.19 1.19 0 0 0-.09.15c0 .05 0 .08-.07.13A1 1 0 0 0 4 12a1 1 0 0 0 .07.36c0 .05 0 .08.07.13a1.19 1.19 0 0 0 .09.15l5 6A1 1 0 0 0 10 19a1 1 0 0 0 .64-.23a1 1 0 0 0 .13-1.41L7.14 13H19a1 1 0 0 0 0-2Z"/>
+                </svg>
+                <p>Retour à la page de connexion</p>
+            </a>
+        {% endif %}
+    </main>
+{% endblock %}

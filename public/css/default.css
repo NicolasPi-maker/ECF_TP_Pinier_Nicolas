@@ -20,6 +20,18 @@ header {
   margin: 0;
 }
 
+.nav-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.nav-links {
+  margin-right: 2em;
+}
 
 /* Sidenav menu */
 .sidenav {
@@ -36,12 +48,11 @@ header {
 
 /* Sidenav menu links */
 .sidenav a {
-  padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 2em;
   color: whitesmoke;
   display: block;
-  margin-bottom: 1em;
+  margin: 1em 0;
   transition: 0.3s;
 }
 
@@ -65,7 +76,7 @@ header {
 /* Close btn */
 .sidenav .close {
   position: absolute;
-  top: 0;
+  top: -75px;
   right: 25px;
   font-size: 4em;
 }
@@ -76,6 +87,65 @@ header {
   height: 6px;
   background-color: black;
   margin: 10px 2.5em;
+}
+
+ /* Style The Dropdown Button */
+ .dropbtn {
+   transition: ease-in-out .4s;
+   cursor: pointer;
+   min-width: 5em;
+   min-height: 5em;
+ }
+
+ .dropbtn > *:hover {
+   transition: ease-in-out .2s;
+   color: black;
+ }
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content, .dropdown-content-customer {
+  display: none;
+  position: absolute;
+  min-width: 100%;
+  font-size: 1em;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content {
+  top: 80px;
+}
+
+.dropdown-customer {
+  top: 5em;
+  right: -30px;
+  min-width: 25em;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 1.7em;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 #span-top {
@@ -103,6 +173,11 @@ header {
     display: flex;
   }
 
+  .link-navbar > * {
+    justify-content: center;
+    align-items: center;
+  }
+
   .nav-links {
     display: flex;
     justify-content: center;
@@ -122,9 +197,27 @@ header {
     text-decoration: none;
     color: black;
   }
+  .dropdown {
+    width: auto;
+  }
 
-  li > a:hover {
+  .dropbtn {
+    min-height: 3em;
+    min-width: 3em;
+  }
+
+  a:hover, .dropdown:hover {
     transition: ease-in .2s;
     color: lightcoral
+  }
+
+  .dropdown-content {
+    right: -75px;
+    top: 65px;
+    min-width: 15em;
+  }
+
+  .dropdown-content > a {
+    font-size: 1em;
   }
 }

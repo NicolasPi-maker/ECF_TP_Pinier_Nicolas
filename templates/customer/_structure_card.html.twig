@@ -1,0 +1,114 @@
+<section id="franchise-branding">
+    <img src="{{asset('uploads/import/'~ structure.getLogoUrl )}}" alt="franchise logo branding" class="franchise-logo">
+    <h1 id="main-title">{{ structure.getStructureName }}</h1>
+    <a href="{{ structure.getUrl }}" class="franchise-url">{{ structure.getUrl }}</a>
+</section>
+
+<section class="franchise-info-wrapper">
+    <ul class="franchise-main-info">
+        <li>
+            <div class="customer_address">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8Z"/></g>
+                </svg>
+                <p>{{ structure.getStructureAddress }}</p>
+            </div>
+        </li>
+        <li>
+            <div class="contact-email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2S7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"/>
+                </svg>
+                <p>{{ structure.getManagerName}}</p>
+            </div>
+        </li>
+        <li>
+            <div class="contact-email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
+                    <path fill="currentColor" d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5l39.3-50.5l42.8 33.3h643.1l42.8-33.3l39.3 50.5l-27.7 21.5zM833.6 232L512 482L190.4 232l-42.8-33.3l-39.3 50.5l27.6 21.5l341.6 265.6a55.99 55.99 0 0 0 68.7 0L888 270.8l27.6-21.5l-39.3-50.5l-42.7 33.2z"/>
+                </svg>
+                <p>{{ structure.getUserId }}</p>
+            </div>
+        </li>
+    </ul>
+    <div class="toggle-btn-wrapper">
+        <div class="form-input slider-block">
+            <label class="switch">
+                <input type="checkbox" disabled class="switch global" value="{{ structure.isIsactive }}" id="{{ structure.getId }}">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+</section>
+
+<section class="franchise-permissions">
+    <h2>Permissions de la Structure</h2>
+    <section>
+        <div class="form-field form-permissions">
+            <div class="form-label">
+                <label for="sell_drink">Vente de boisson</label>
+            </div>
+            <div class="form-input slider-block">
+                <label class="switch">
+                    <input type="checkbox" value="{{ structure.isSellDrink }}" class="global" name="sell_drink" disabled>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div class="form-field form-permissions">
+            <div class="form-label">
+                <label for="manage_schedule">Gestion du planning</label>
+            </div>
+            <div class="form-input slider-block">
+                <label class="switch">
+                    <input type="checkbox" value="{{ structure.isManageSchedule }}" class="global" name="manage_schedule" disabled>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div class="form-field form-permissions">
+            <div class="form-label">
+                <label for="create_newsletter">Création de Newsletter</label>
+            </div>
+            <div class="form-input slider-block">
+                <label class="switch">
+                    <input type="checkbox" value="{{ structure.isCreateNewsletter }}" class="global" name="create_newsletter" disabled>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div class="form-field form-permissions">
+            <div class="form-label">
+                <label for="add_promotion">Créer une promotion</label>
+            </div>
+            <div class="form-input slider-block">
+                <label class="switch">
+                    <input type="checkbox" value="{{ structure.isAddPromotion }}" class="global" name="add_promotion" disabled>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div class="form-field form-permissions">
+            <div class="form-label">
+                <label for="create_event">Créer un évenement</label>
+            </div>
+            <div class="form-input slider-block">
+                <label class="switch">
+                    <input type="checkbox" value="{{ structure.isCreateEvent }}" class="global" name="create_event" disabled>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div class="form-field form-permissions">
+            <div class="form-label">
+                <label for="sell_food">Vendre de la nouriture</label>
+            </div>
+            <div class="form-input slider-block">
+                <label class="switch">
+                    <input type="checkbox" value="{{ structure.isSellFood }}" class="global" name="sell_food" disabled>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </section>
+</section>

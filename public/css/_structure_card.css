@@ -25,3 +25,34 @@ article {
 .structure-text > a {
   text-decoration: none;
 }
+
+.structure-perms-header {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.structure-perms-title {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.3em;
+  font-size: 1.75em;
+}
+
+.structure-perms-toggle {
+  transition: ease-in-out 0.4s;
+}
+
+.less-perms, .more-perms {
+  display: flex;
+  justify-content: center;
+  margin-left: 0.5em;
+}
+
+.less-perms, .structure-perms-toggle, .open-structure-perms-modal {
+  display: none;
+}
+
+.structure-perms-title > * {
+  margin-right: 1em;
+}

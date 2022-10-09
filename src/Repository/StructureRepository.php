@@ -63,4 +63,56 @@ class StructureRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function getAll(): array
+    {
+      return $this->createQueryBuilder('s')
+        ->getQuery()
+        ->getArrayResult()
+        ;
+    }
+
+    public function getAllByCurrentFranchise($franchiseId): array
+    {
+      return $this->createQueryBuilder('s')
+        ->where('s.franchise_id = :franchiseId')
+        ->setParameter('franchiseId', $franchiseId)
+        ->getQuery()
+        ->getArrayResult()
+        ;
+    }
+
+  public function franchiseStructureFiltered($franchiseId, $filter = null)
+  {
+    return $this->createQueryBuilder('s')
+      ->where('s.is_active = :filter')
+      ->andWhere('s.franchise_id = :franchiseId')
+      ->setParameter('filter', $filter)
+      ->setParameter('franchiseId', $franchiseId)
+      ->getQuery()
+      ->getArrayResult()
+      ;
+  }
+
+    public function structureFiltered($filter = null)
+    {
+      return $this->createQueryBuilder('s')
+        ->where('s.is_active = :filter')
+        ->setParameter('filter', $filter)
+        ->getQuery()
+        ->getArrayResult()
+        ;
+    }
+
+    public function structureFilteredByFranchise($franchiseId, $filter = null): array
+    {
+      return $this->createQueryBuilder('s')
+        ->where('s.is_active = :filter')
+        ->andWhere('s.franchise_id = :franchiseId')
+        ->setParameter('franchiseId', $franchiseId)
+        ->setParameter('filter', $filter)
+        ->getQuery()
+        ->getArrayResult()
+        ;
+    }
 }

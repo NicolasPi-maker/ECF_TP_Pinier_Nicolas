@@ -101,7 +101,7 @@
                         }) }}
                     </div>
                     <div class="form-input">
-                        {{ form_widget(form.logo_url)}}
+                        {{ form_widget(form.logo_url, {'attr': {'value': franchise.getLogoUrl }})}}
                     </div>
                 </div>
             </div>

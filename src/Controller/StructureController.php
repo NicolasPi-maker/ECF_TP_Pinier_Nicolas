@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,9 +24,36 @@ class StructureController extends AbstractController
     $this->slugger = $slugger;
   }
 
+  ### Read Structure ###
+  #[Route(path: '/staff/structures', name: 'staff_structure')]
+  public function index(Request $request)
+  {
+    $structureRepo = $this->em->getRepository(Structure::class);
+
+    $structures = $structureRepo->getAll();
+
+    if($request->get('ajax')) {
+      if($request->get('filter') === 'all') {
+        $structures = $structureRepo->getAll();
+      } else {
+        $filter = $request->get('filter');
+        $structures = $structureRepo->structureFiltered($filter);
+      }
+      return new JsonResponse([
+        'content'=> $this->renderView('structure/_structure_card.html.twig', [
+          'structures' => $structures,
+        ])
+      ]);
+    }
+
+    return $this->render('structure/structures.html.twig', [
+      'structures' => $structures,
+    ]);
+  }
+
   ### Create Structure ###
   #[Route(path: '/staff/franchise:{id}/create_structure', name: 'create_structure')]
-  public function index(Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger, int $id)
+  public function createStructure(Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger, int $id)
   {
     $franchiseRepo = $doctrine->getRepository(Franchise::class);
     $linkedFranchise = $franchiseRepo->findOneBy(['id' => $id]);
@@ -40,7 +68,15 @@ class StructureController extends AbstractController
       $this->logoUrlConstructor($form, $structure);
 
       $entityManager = $doctrine->getManager();
+
       $structure->setFranchiseId($linkedFranchise);
+      $structure->setSellFood($linkedFranchise->isSellFood());
+      $structure->setSellDrink($linkedFranchise->isSellDrink());
+      $structure->setManageSchedule($linkedFranchise->isManageSchedule());
+      $structure->setCreateNewsletter($linkedFranchise->isCreateNewsletter());
+      $structure->setCreateEvent($linkedFranchise->isCreateEvent());
+      $structure->setAddPromotion($linkedFranchise->isAddPromotion());
+
       $entityManager->persist($structure);
       $entityManager->flush();
 
@@ -53,8 +89,8 @@ class StructureController extends AbstractController
   }
 
   ### Edit structure ###
-  #[Route(path: '/staff/franchise:{franchiseId}/edit_structure/{id}', name: 'edit_franchise')]
-  public function editFranchise(Request $request,int $franchiseId ,int $id): Response
+  #[Route(path: '/staff/edit_structure/{id}', name: 'edit_structure')]
+  public function editFranchise(Request $request, int $id): Response
   {
     $structure= $this->getSelectedStructure($id);
 
@@ -84,7 +120,7 @@ class StructureController extends AbstractController
   }
 
   ### Remove structure ###
-  #[Route(path: '/delete/structure/{id}', name: 'remove_franchise')]
+  #[Route(path: '/delete/structure/{id}', name: 'remove_structure')]
   public function removeFranchise($id)
   {
     $franchise = $this->getSelectedStructure($id);

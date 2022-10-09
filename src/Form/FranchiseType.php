@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Franchise;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -20,7 +22,10 @@ class FranchiseType extends AbstractType
             ->add('client_name')
             ->add('client_address')
             ->add('url')
-            ->add('logo_url', FileType::class, array('data_class' => null))
+            ->add('logo_url', FileType::class, [
+              'data_class' => null,
+              'required' => false,
+            ])
             ->add('technical_contact', EmailType::class)
             ->add('commercial_contact', EmailType::class)
             ->add('short_description', TextType::class)

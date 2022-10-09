@@ -46,10 +46,10 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        $user = $token->getUser()->getRoles();
-        
+        $user = $token->getUser();
+        $userRoles = $user->getRoles();
         // For example:
-        switch ($user[0]) {
+        switch ($userRoles[0]) {
           case 'ROLE_ADMIN' :
             return new RedirectResponse($this->urlGenerator->generate('staff'));
           case 'ROLE_FRANCHISE' :

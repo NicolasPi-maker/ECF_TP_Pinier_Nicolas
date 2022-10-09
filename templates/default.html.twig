@@ -16,35 +16,106 @@
         <div id="navigation-menu">
             <div id="mySidenav" class="sidenav">
                 <a id="closeBtn" href="#" class="close">×</a>
-                <ul>
-                    <li><a href="/staff">Franchise</a></li>
-                    <li><a href="/staff/create_franchise">Ajouter une franchise</a></li>
-                    <li><a href="/staff/structures">Structure</a></li>
-                    <li><a href="/staff/create_structure">Ajouter une structure</a></li>
-                    {% if app.user %}
-                        <li><a href="{{ path('app_logout') }}">Deconnexion</a></li>
-                    {% else %}
-                        <li><a href="/login">Connexion</a></li>
-                    {% endif %}
-                </ul>
-            </div>
+                <ul class="nav-wrapper">
+                {% if app.user.roles[0] == 'ROLE_ADMIN' %}
+                <div class="dropdown">
+                    <svg class="dropbtn" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                        <path fill="white" d="M16 8a5 5 0 1 0 5 5a5 5 0 0 0-5-5Z"/>
+                        <path fill="white" d="M16 2a14 14 0 1 0 14 14A14.016 14.016 0 0 0 16 2Zm7.992 22.926A5.002 5.002 0 0 0 19 20h-6a5.002 5.002 0 0 0-4.992 4.926a12 12 0 1 1 15.985 0Z"/>
+                    </svg>
+                    <div class="dropdown-content">
+                        <a href="{{ path('create_user') }}">Créer un utilisateur</a>
+                        <a href="{{ path('change-password') }}">Modifier le mot de passe</a>
+                        <a href="{{ path('app_logout') }}">Deconnexion</a>
+                    </div>
+                </div>
 
+                <li><a href="{{ path('staff') }}">Franchises</a></li>
+                <li><a href="{{ path('create_franchise') }}">Ajouter une franchise</a></li>
+                <li><a href="{{ path('staff_structure') }}">Structures</a></li>
+            </ul>
+            {% elseif app.user %}
+                <div class="dropdown">
+                    <svg class="dropbtn" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                        <path fill="white" d="M16 8a5 5 0 1 0 5 5a5 5 0 0 0-5-5Z"/>
+                        <path fill="white" d="M16 2a14 14 0 1 0 14 14A14.016 14.016 0 0 0 16 2Zm7.992 22.926A5.002 5.002 0 0 0 19 20h-6a5.002 5.002 0 0 0-4.992 4.926a12 12 0 1 1 15.985 0Z"/>
+                    </svg>
+                    <div class="dropdown-content dropdown-customer">
+                        {% if app.user.roles[0] == 'ROLE_FRANCHISE'%}
+                            <a href="{{ path('franchise') }}">Accueil</a>
+                        {% else %}
+                            <a href="{{ path('structure') }}">Accueil</a>
+                        {% endif%}
+                        <a href="{{ path('change-password') }}">Modifier le mot de passe</a>
+                        <a href="{{ path('app_logout') }}">Deconnexion</a>
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+            {% if app.user.roles[0] == 'ROLE_ADMIN' %}
             <div id="burger-menu">
                 <a href="#" id="openBtn">
-                      <span class="burger-icon">
-                        <span id="span-top"></span>
-                        <span id="span-mid"></span>
-                        <span id="span-bot"></span>
-                      </span>
+                  <span class="burger-icon">
+                    <span id="span-top"></span>
+                    <span id="span-mid"></span>
+                    <span id="span-bot"></span>
+                  </span>
                 </a>
             </div>
+            {% else %}
+                <ul class="nav-links">
+                    <div class="dropdown">
+                        <svg class="dropbtn" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                            <path fill="black" d="M16 8a5 5 0 1 0 5 5a5 5 0 0 0-5-5Z"/>
+                            <path fill="black" d="M16 2a14 14 0 1 0 14 14A14.016 14.016 0 0 0 16 2Zm7.992 22.926A5.002 5.002 0 0 0 19 20h-6a5.002 5.002 0 0 0-4.992 4.926a12 12 0 1 1 15.985 0Z"/>
+                        </svg>
+                        <div class="dropdown-content dropdown-customer">
+                            {% if app.user.roles[0] == 'ROLE_FRANCHISE'%}
+                                <a href="{{ path('franchise') }}">Accueil</a>
+                            {% else %}
+                                <a href="{{ path('structure') }}">Accueil</a>
+                            {% endif%}
+                            <a href="{{ path('change-password') }}">Modifier le mot de passe</a>
+                            <a href="{{ path('app_logout') }}">Deconnexion</a>
+                        </div>
+                    </div>
+                </ul>
+            {% endif %}
         </div>
         <div class="link-navbar">
             <ul class="nav-links">
-                <li><a href="/staff">Franchise</a></li>
-                <li><a href="/staff/structure">Structure</a></li>
-                {% if app.user %}
-                    <li><a href="{{ path('app_logout') }}">Deconnexion</a></li>
+                {% if app.user.roles[0] == 'ROLE_ADMIN' %}
+                <li><a href="{{ path('staff') }}">Franchises</a></li>
+                <li><a href="{{ path('create_franchise') }}">Ajouter une franchise</a></li>
+                <li><a href="{{ path('staff_structure') }}">Structures</a></li>
+
+                <div class="dropdown">
+                    <svg class="dropbtn" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                        <path fill="currentColor" d="M16 8a5 5 0 1 0 5 5a5 5 0 0 0-5-5Z"/>
+                        <path fill="currentColor" d="M16 2a14 14 0 1 0 14 14A14.016 14.016 0 0 0 16 2Zm7.992 22.926A5.002 5.002 0 0 0 19 20h-6a5.002 5.002 0 0 0-4.992 4.926a12 12 0 1 1 15.985 0Z"/>
+                    </svg>
+                    <div class="dropdown-content">
+                        <a href="{{ path('create_user') }}">Créer un utilisateur</a>
+                        <a href="{{ path('change-password') }}">Modifier le mot de passe</a>
+                        <a href="{{ path('app_logout') }}">Deconnexion</a>
+                    </div>
+                </div>
+                {% elseif app.user %}
+                    <div class="dropdown">
+                        <svg class="dropbtn" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                            <path fill="black" d="M16 8a5 5 0 1 0 5 5a5 5 0 0 0-5-5Z"/>
+                            <path fill="black" d="M16 2a14 14 0 1 0 14 14A14.016 14.016 0 0 0 16 2Zm7.992 22.926A5.002 5.002 0 0 0 19 20h-6a5.002 5.002 0 0 0-4.992 4.926a12 12 0 1 1 15.985 0Z"/>
+                        </svg>
+                        <div class="dropdown-content dropdown-customer">
+                            {% if app.user.roles[0] == 'ROLE_FRANCHISE'%}
+                                <a href="{{ path('franchise') }}">Accueil</a>
+                            {% else %}
+                                <a href="{{ path('structure') }}">Accueil</a>
+                            {% endif%}
+                            <a href="{{ path('change-password') }}">Modifier le mot de passe</a>
+                            <a href="{{ path('app_logout') }}">Deconnexion</a>
+                        </div>
+                    </div>
                 {% endif %}
             </ul>
         </div>

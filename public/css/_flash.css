@@ -1,0 +1,42 @@
+@keyframes In {
+  0% { top: -150px; }
+  100% { top: 0; }
+}
+
+@keyframes Out {
+  0% { top: 0; }
+  100% { top: -150px; }
+}
+
+.alert {
+  animation: In 1s;
+  display: flex;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  color: white;
+  width: 100%;
+  height: 10%;
+
+}
+
+.alert > * {
+  margin: 2em;
+}
+
+.alert-message {
+  font-size: 2.5em;
+}
+
+.btn-close > p{
+  font-size: 8em;
+}
+
+.alert-success {
+  background-color: #c4dfaa;
+}
+
+.alert-danger {
+  background-color: #ff6348;
+}

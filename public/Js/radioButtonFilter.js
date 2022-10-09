@@ -2,7 +2,7 @@ document.querySelectorAll(".js-filter input").forEach(input => {
     input.addEventListener("change", () => {
         const Params = new URLSearchParams();
 
-        Params.append('filter', input.value)
+        Params.append('filter', input.value);
 
         const Url = new URL(window.location.href);
 
@@ -15,20 +15,9 @@ document.querySelectorAll(".js-filter input").forEach(input => {
         ).then(data => {
             const content = document.querySelector("#content");
             content.innerHTML = data.content;
-            dynamicCheckedToggle();
         }).catch(e => {
-                console.log(e)
-            })
+            throw new Error(e)
+        })
     })
 })
 
-//Permet au moment du chargement de la page de checked/unchecked les bouton toggle selon leur valeur
-const dynamicCheckedToggle = () => {
-    document.querySelectorAll(".switch input").forEach(input => {
-        if(input.value === '1') {
-            input.checked = true
-        }
-    });
-}
-
-dynamicCheckedToggle();

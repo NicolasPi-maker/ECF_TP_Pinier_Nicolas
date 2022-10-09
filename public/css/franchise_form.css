@@ -6,8 +6,13 @@ main {
 }
 
 .main-title {
+  margin: 2em 1em 2em 1em;
+  text-align: center;
+}
+
+h1 {
   font-size: 3.5em;
-  margin-bottom: 2.5em;
+  margin: 0;
 }
 
 h2 {
@@ -59,13 +64,44 @@ form {
   background-color: rgb(255, 107, 129, 0.5);
   color: whitesmoke;
   font-weight: bold;
-  margin-bottom: 4em;
+  margin-bottom: 2em;
 }
 
 .form-permissions {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.form-error {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  transition: ease-in .2s;
+  font-size: 2em;
+  color: #ff5a79;
+  max-width: 80vw;
+  margin-bottom: 1em;
+}
+
+.form-error > * {
+  list-style: none;
+  padding: 0;
+}
+
+.password-errors {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.password-errors > * {
+  text-align: left;
+  color: black;
+  font-size: 1em;
+  margin: 0;
 }
 
 /* The switch - the box around the slider */
@@ -155,3 +191,10 @@ form {
   border-radius: 50%;
 }
 
+#select_user_franchise {
+  display: none;
+}
+
+#user_franchise {
+ font-size: 0.8em;
+}

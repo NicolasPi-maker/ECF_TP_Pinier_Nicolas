@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Franchise;
+use App\Entity\Structure;
+use App\Entity\User;
 use App\Form\FranchiseType;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,13 +32,19 @@ class FranchiseController extends AbstractController
 
     $form->handleRequest($request);
 
-
     if($form->isSubmitted() && $form->isValid()) {
 
-      $this->logoUrlConstructor($form, $franchise);
+      $userRepo = $this->em->getRepository(User::class);
+      $user = $userRepo->findOneBy(['id' => $form->getData()->getUserId()[0]->getId()]);
 
+      $this->logoUrlConstructor($form, $franchise);
+      $user->setFranchise($franchise);
+
+      $this->em->persist($user);
       $this->em->persist($franchise);
       $this->em->flush();
+
+      return $this->redirect($this->generateUrl('staff'));
     }
 
     return $this->render('forms/franchise_form.html.twig', [
@@ -61,11 +67,18 @@ class FranchiseController extends AbstractController
     $form = $this->createForm(FranchiseType::class, $franchise);
     $form->handleRequest($request);
 
-    if($form->isSubmitted() && $form->isValid() ) {
+    if($form->isSubmitted() && $form->isValid()) {
+
+      $userRepo = $this->em->getRepository(User::class);
+      $user = $userRepo->findOneBy(['id' => $form->getData()->getUserId()[0]->getId()]);
 
       $this->logoUrlConstructor($form, $franchise);
+      $user->setFranchise($franchise);
 
+      $this->em->persist($user);
       $this->em->persist($franchise);
+      $this->structurePermsSynchronizer($id);
+
       $this->em->flush();
 
       return $this->redirect($this->generateUrl('staff'));
@@ -122,6 +135,43 @@ class FranchiseController extends AbstractController
       } catch (FileException $e) {
         echo $e;
       }
+    }
+  }
+
+  public function structurePermsSynchronizer(int $id)
+  {
+    $franchiseRepo = $this->em->getRepository(Franchise::class);
+    $currentFranchise = $franchiseRepo->findOneBy(['id' => $id]);
+
+    $structureRepo = $this->em->getRepository(Structure::class);
+    $structures = $structureRepo->getAllByCurrentFranchise($id);
+
+    $uow = $this->em->getUnitOfWork();
+    $uow->computeChangeSets();
+    $changeSet = $uow->getEntityChangeSet($currentFranchise);
+
+    foreach($structures as $structure) {
+      $currentStructure = $structureRepo->findOneBy(['id'=> $structure['id']]);
+
+      # get only global changed perms #
+      foreach($changeSet as $key => $change) {
+
+        # Generate dynamically setter depends on changed perms #
+        $underscorePosition = strpos($key, '_');
+        $searchedLetter = $key[$underscorePosition+1];
+
+        $key = ucfirst($key);
+        $key = str_replace($searchedLetter, strtoupper($searchedLetter), $key);
+        $key = str_replace('_','',$key);
+        $key = 'set'.$key;
+
+
+        if($change[1] === true || $change[1] === false) {
+          $currentStructure->$key($change[1]);
+        }
+      }
+
+      $this->em->persist($currentStructure);
     }
   }
 }

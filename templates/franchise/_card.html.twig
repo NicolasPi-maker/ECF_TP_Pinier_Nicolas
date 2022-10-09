@@ -1,9 +1,57 @@
 {% block stylesheets %}
     <link href="{{ asset('css/default.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('css/staff.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/_modal.css') }}" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
 {% for franchise in franchises %}
+    <!-- The Modal to confirm submit -->
+    <div class="deleteModal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p class="modal-text">
+                Souhaitez vous supprimer la franchise de
+                <span class="modal-structure-name">{{ franchise.client_name}}</span>
+                <a href="{{franchise.url }}">({{franchise.url }})</a>
+            </p>
+            <div class="button-wrapper">
+                <button class="form-button btn-confirm-delete" type="submit">
+                    <a href="staff/delete/franchise/{{ franchise.id }}">
+                        Supprimer
+                    </a>
+                </button>
+                <button class="form-button close-delete">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- The Modal to confirm submit -->
+    <div class="updateActive modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            {% if franchise.is_active == 1 %}
+                <p class="modal-text">Voulez-vous confirmer la <span class="highlight-desactive">désactivation</span> de la franchise de {{ franchise.client_name}} ? </p>
+            {% else %}
+                <p class="modal-text">Voulez-vous confirmer <span class="highlight-active">l'activation</span> de la franchise de {{ franchise.client_name}} ?<p>
+            {% endif %}
+                <div class="button-wrapper">
+                <form method="post" class="form-button update-active-button">
+                        <input type="hidden" name="franchiseId" value={{ franchise.id }}>
+                        <input
+                            type="submit"
+                            value="Confirmer"
+                            name="btn-switch-active"
+                            class="input-active"
+                        />
+                </form>
+                <button class="form-button close-button">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
     <article class="main-wrapper">
         <section class="franchise-main-info">
             <img src="{{asset('uploads/import/'~ franchise.logo_url )}}" alt="franchise logo branding" class="franchise-logo">
@@ -17,15 +65,16 @@
         <section class="franchise-more-info">
             <div class="form-input slider-block">
                 <label class="switch">
-                    <input type="checkbox" class="switch" value="{{ franchise.is_active }}" id="{{ franchise.id }}">
+                    <input type="checkbox" class="switch global btn-update-structure" value="{{ franchise.is_active }}" id="{{ franchise.id }}">
                     <span class="slider round"></span>
                 </label>
             </div>
             <button type="button" class="btn-see-more">
                 <a href="/staff/franchise/{{ franchise.id }}">Consulter</a>
+                <span class="see-more-dots">...</span>
             </button>
         </section>
-        <a href="/staff/edit/franchise/{{ franchise.id }}">
+        <a href="staff/edit/franchise/{{ franchise.id }}">
         <div class="edit-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="3.5em" height="3.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
                 <path fill="#c5b62f" d="M832 512a32 32 0 1 1 64 0v352a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V160a32 32 0 0 1 32-32h352a32 32 0 0 1 0 64H192v640h640V512z"/>
@@ -33,14 +82,12 @@
             </svg>
         </div>
         </a>
-        <a href="staff/delete/franchise/{{ franchise.id }}">
-            <div class="delete-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="3.5em" height="3.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
-                    <g fill="none" stroke="#df9a9a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
-                        <path d="m10.25 5.75l-4.5 4.5m0-4.5l4.5 4.5"/><circle cx="8" cy="8" r="6.25"/>
-                    </g>
-                </svg>
-            </div>
-        </a>
+        <div class="delete-button confirmDelete">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3.5em" height="3.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                <g fill="none" stroke="#df9a9a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                    <path d="m10.25 5.75l-4.5 4.5m0-4.5l4.5 4.5"/><circle cx="8" cy="8" r="6.25"/>
+                </g>
+            </svg>
+        </div>
     </article>
 {% endfor %}

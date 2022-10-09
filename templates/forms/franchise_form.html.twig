@@ -4,11 +4,13 @@
 
 {% block stylesheets %}
     <link href="{{ asset('css/default.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/_flash.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('css/franchise_form.css') }}" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
 {% block content %}
     <main>
+        {% include "_partials/_flash.html.twig" %}
         <h1 class="main-title">Ajouter une franchise</h1>
         <section class="text-fields">
             {{ form_start(form) }}
@@ -205,4 +207,9 @@
             {{ form_end(form) }}
         </section>
     </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/burgerMenu.js') }}"></script>
+    <script src="{{ asset('js/_flash.js') }}"></script>
 {% endblock %}

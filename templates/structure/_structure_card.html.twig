@@ -1,0 +1,105 @@
+
+{% for structure in structures %}
+    <!-- The Modal to confirm submit -->
+    <div class="deleteModal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <p class="modal-text">
+                Souhaitez vous supprimer la structure
+                <span class="modal-structure-name">{{ structure.structure_name}}</span>
+                <a href="{{structure.url }}">({{structure.url }})</a>
+            </p>
+            <div class="button-wrapper">
+                <button class="form-button btn-confirm-delete" type="submit">
+                    <a href="/delete/structure/{{ structure.id }}">
+                        Supprimer
+                    </a>
+                </button>
+                <button class="form-button close-delete">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- The Modal to confirm submit -->
+    <div class="updateActive update-modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            {% if structure.is_active == 1 %}
+            <p class="modal-text">Voulez-vous confirmer la <span class="highlight-desactive">désactivation</span> de la structure {{ structure.structure_name }} ? </p>
+            {% else %}
+                <p class="modal-text">Voulez-vous confirmer <span class="highlight-active">l'activation</span> de la structure de {{ structure.structure_name }} ?<p>
+            {% endif %}
+            <div class="button-wrapper">
+                <form method="post" class="form-button update-active-button">
+                        <input type="hidden" name="structureId" value={{ structure.id }}>
+                        <input
+                                type="submit"
+                                value="Confirmer"
+                                name="btn-switch-active"
+                                class="input-active"
+                        />
+                </form>
+                <button class="close-button form-button ">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    </div>
+    <article class="main-wrapper">
+        <section class="structure-main-info">
+            <img src="{{asset('uploads/import/'~ structure.logo_url )}}" alt="franchise logo branding" class="structure-logo">
+            <div class="structure-text">
+                <h3>{{ structure.structure_name }}</h3>
+                <p class="franchise_address">{{ structure.structure_address }}</p>
+                <p>{{ structure.manager_name}}</p>
+                <a href="{{ structure.url }}">{{ structure.url}}</a>
+            </div>
+        </section>
+        <section class="franchise-more-info">
+            <div class="form-input slider-block">
+                <label class="switch">
+                    <input type="checkbox" class="switch global btn-update-structure" value="{{ structure.is_active }}" id="{{ structure.id }}">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </section>
+        <a href="/staff/edit_structure/{{ structure.id }}">
+            <div class="edit-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="3.5em" height="3.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
+                    <path fill="#c5b62f" d="M832 512a32 32 0 1 1 64 0v352a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V160a32 32 0 0 1 32-32h352a32 32 0 0 1 0 64H192v640h640V512z"/>
+                    <path fill="#c5b62f" d="m469.952 554.24l52.8-7.552L847.104 222.4a32 32 0 1 0-45.248-45.248L477.44 501.44l-7.552 52.8zm422.4-422.4a96 96 0 0 1 0 135.808l-331.84 331.84a32 32 0 0 1-18.112 9.088L436.8 623.68a32 32 0 0 1-36.224-36.224l15.104-105.6a32 32 0 0 1 9.024-18.112l331.904-331.84a96 96 0 0 1 135.744 0z"/>
+                </svg>
+            </div>
+        </a>
+        <div class="delete-button confirmDelete">
+            <svg xmlns="http://www.w3.org/2000/svg" width="3.5em" height="3.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                <g fill="none" stroke="#df9a9a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                    <path d="m10.25 5.75l-4.5 4.5m0-4.5l4.5 4.5"/><circle cx="8" cy="8" r="6.25"/>
+                </g>
+            </svg>
+        </div>
+    </article>
+    <article class="franchise-permissions">
+        <div class="structure-perms-title">
+            <div class="structure-perms-header">
+                <h3>Permissions</h3>
+                <div>
+                    <svg class="less-perms" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20">
+                        <path fill="currentColor" d="M10 1c-5 0-9 4-9 9s4 9 9 9s9-4 9-9s-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7s7 3.1 7 7s-3.1 7-7 7zM6 9v2h8V9H6z" class="st0"/>
+                    </svg>
+                </div>
+                <div>
+                    <svg class="more-perms" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="currentColor" d="M16 4c6.6 0 12 5.4 12 12s-5.4 12-12 12S4 22.6 4 16S9.4 4 16 4m0-2C8.3 2 2 8.3 2 16s6.3 14 14 14s14-6.3 14-14S23.7 2 16 2z"/>
+                        <path fill="currentColor" d="M24 15h-7V8h-2v7H8v2h7v7h2v-7h7z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="structure-perms-toggle">
+            {{ render(controller(
+                'App\\Controller\\StructurePermsController::createDynamicPermsForm', {id: structure.id }
+            )) }}
+        </div>
+    </article>
+{% endfor %}

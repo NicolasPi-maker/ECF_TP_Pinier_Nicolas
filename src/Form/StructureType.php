@@ -20,12 +20,6 @@ class StructureType extends AbstractType
             ->add('logo_url', FileType::class, array('data_class' => null))
             ->add('url')
             ->add('is_active')
-            ->add('sell_drink')
-            ->add('manage_schedule')
-            ->add('create_newsletter')
-            ->add('create_event')
-            ->add('add_promotion')
-            ->add('sell_food')
         ;
     }
 

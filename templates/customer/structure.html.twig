@@ -1,0 +1,29 @@
+{% extends 'default.html.twig'%}
+
+{% block title %}Gestion des franchises{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/default.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/staff.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/_card.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/_structure_card.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/franchise_structure_info.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/_flash.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+
+    <main>
+        {% include "_partials/_flash.html.twig" %}
+
+        {% include 'customer/_structure_card.html.twig' %}
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/burgerMenu.js') }}"></script>
+    <script src="{{ asset('js/_flash.js') }}"></script>
+    <script src="{{ asset('js/onLoad.js') }}"></script>
+    <script src="{{ asset('js/radioButtonFilter.js') }}"></script>
+    <script src="{{ asset('js/modalTrigger.js') }}"></script>
+{% endblock %}

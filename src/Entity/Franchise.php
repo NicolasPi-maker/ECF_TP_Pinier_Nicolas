@@ -42,10 +42,10 @@ class Franchise
     #[ORM\Column(nullable: true)]
     private ?bool $is_active = null;
 
-    #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: User::class)]
+    #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: User::class, cascade: ['remove'])]
     private Collection $user_id;
 
-    #[ORM\OneToMany(mappedBy: 'franchise_id', targetEntity: Structure::class)]
+    #[ORM\OneToMany(mappedBy: 'franchise_id', targetEntity: Structure::class, cascade: ['remove'])]
     private Collection $structures;
 
     #[ORM\Column(nullable: true)]
@@ -70,6 +70,11 @@ class Franchise
     {
         $this->user_id = new ArrayCollection();
         $this->structures = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+      return $this->client_name;
     }
 
     public function getId(): ?int

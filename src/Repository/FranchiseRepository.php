@@ -84,12 +84,10 @@ class FranchiseRepository extends ServiceEntityRepository
       public function franchiseFilteredBySearch($search = null)
       {
         return $this->createQueryBuilder('f')
-          ->where('f.client_name LIKE :search')
+          ->orWhere('f.client_name LIKE :search')
           ->orWhere('f.client_address LIKE :search_address')
-          ->orWhere('f.id LIKE :search_id')
           ->setParameter('search', '%'.$search.'%')
           ->setParameter('search_address', '%'.$search.'%')
-          ->setParameter('search_id','%'.$search.'%')
           ->getQuery()
           ->getArrayResult();
       }

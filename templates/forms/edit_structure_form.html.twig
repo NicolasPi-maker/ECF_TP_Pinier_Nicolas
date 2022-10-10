@@ -9,7 +9,9 @@
 
 {% block content %}
     <main>
-        <h1 class="main-title">Modifier la structure {{ structure.getStructureName }}</h1>
+        <div class="title-wrapper">
+            <h1 class="main-title">Modifier la structure <span>{{ structure.getStructureName }}</span></h1>
+        </div>
         <section>
             {{ form_start(form) }}
             <div class="form-field">

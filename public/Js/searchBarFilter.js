@@ -16,7 +16,18 @@ searchBar.addEventListener('input', () => {
     ).then(data => {
         const content = document.querySelector("#content");
         content.innerHTML = data.content;
+        updatePermsDisplayOnSearch();
     }).catch(e => {
         throw new Error(e)
     })
 })
+
+const updatePermsDisplayOnSearch = () => {
+    document.querySelectorAll(".global").forEach(input => {
+        if(input.value === '1') {
+            input.checked = true
+            input.style.display = "none";
+        }
+    })
+}
+

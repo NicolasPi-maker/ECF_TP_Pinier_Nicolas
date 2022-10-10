@@ -9,7 +9,9 @@
 
 {% block content %}
     <main>
-        <h1 class="main-title">Modifier la franchise de {{ franchise.getClientName }}</h1>
+        <div class="title-wrapper">
+            <h1 class="main-title">Modifier la franchise de <span>{{ franchise.getClientName }}</span></h1>
+        </div>
         <section>
             {{ form_start(form) }}
             <div class="form-field">

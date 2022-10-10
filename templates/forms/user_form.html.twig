@@ -68,16 +68,6 @@
                 {{ form_widget(form.roles) }}
             </div>
         </div>
-        <div class="form-field" id="select_user_franchise">
-            <div class="form-label">
-                {{ form_label(form.franchise, null, {
-                    label: 'Franchise associée à la structure'
-                }) }}
-            <div class="form-input">
-                {{ form_widget(form.franchise) }}
-            </div>
-            </div>
-        </div>
         <div class="button-wrapper">
             <button class="form-button" type="submit">
                 Créer
@@ -90,5 +80,4 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/burgerMenu.js') }}"></script>
-    <script src="{{ asset('js/userTypeTrigger.js') }}"></script>
 {% endblock %}

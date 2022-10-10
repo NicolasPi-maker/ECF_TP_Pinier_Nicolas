@@ -28,6 +28,7 @@ class AdminController extends AbstractController
 
     if(isset($_POST['btn-switch-active'])) {
       $this->updateFranchiseActive();
+      return $this->redirectToRoute('staff');
     }
 
     if($request->get('ajax')) {
@@ -37,8 +38,9 @@ class AdminController extends AbstractController
         $filter = $request->get('filter');
         $franchises = $franchiseRepository->franchiseFiltered($filter);
       }
-      if($request->get('search-filter') !== null) {
-        $searchFilter = $request->get('search-filter');
+
+      if($request->get('search_filter') !== null) {
+        $searchFilter = $request->get('search_filter');
         $franchises = $franchiseRepository->franchiseFilteredBySearch($searchFilter);
       }
       return new JsonResponse([
@@ -47,6 +49,7 @@ class AdminController extends AbstractController
         ])
       ]);
     }
+
     return $this->render('admin/admin.html.twig', [
       'franchises' => $franchises,
       'isFirstConnexion' => $isFirstConnexion,
@@ -64,8 +67,6 @@ class AdminController extends AbstractController
 
       $this->em->persist($currentFranchise);
       $this->em->flush();
-
-      return $this->redirectToRoute('staff');
     }
   }
 

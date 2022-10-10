@@ -11,7 +11,9 @@
 {% block content %}
     <main>
         {% include "_partials/_flash.html.twig" %}
-        <h1 class="main-title">Ajouter une franchise</h1>
+        <div class="title-wrapper">
+            <h1 class="main-title">Ajouter une <span>franchise</span></h1>
+        </div>
         <section class="text-fields">
             {{ form_start(form) }}
             <div class="form-field">

@@ -23,14 +23,16 @@ class StructureDisplayerController extends AbstractController
     $isFirstConnexion = $this->setLastConnexion();
 
     if($isFirstConnexion) {
-      $this->addFlash('danger', 'Veuillez modifier votre mot de passe par défaut rapidement');
+      $this->addFlash('danger', 'Si ce n\'est pas déjà fait, veuillez modifier votre mot de passe par défaut rapidement');
     }
 
-    if($currentStructure->isIsActive()) {
-      return $this->render('customer/structure.html.twig', [
-        'isFirstConnexion' => $isFirstConnexion,
-        'structure' => $currentStructure,
-      ]);
+    if($currentStructure) {
+      if($currentStructure->isIsActive()) {
+        return $this->render('customer/structure.html.twig', [
+          'isFirstConnexion' => $isFirstConnexion,
+          'structure' => $currentStructure,
+        ]);
+      }
     }
 
     return $this->render('miscellaneous/unactivated.html.twig', [

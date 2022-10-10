@@ -15,9 +15,23 @@ document.querySelectorAll(".js-filter input").forEach(input => {
         ).then(data => {
             const content = document.querySelector("#content");
             content.innerHTML = data.content;
+            updatePermsDisplayOnFilter()
         }).catch(e => {
             throw new Error(e)
         })
     })
 })
+
+const updatePermsDisplayOnFilter = () => {
+    document.querySelectorAll(".global").forEach(input => {
+        if(input.value === '1') {
+            input.checked = true
+            input.style.display = "none";
+        }
+    })
+}
+
+
+
+
 

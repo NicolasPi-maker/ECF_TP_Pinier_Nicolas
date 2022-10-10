@@ -7,11 +7,13 @@ use App\Entity\Structure;
 use App\Entity\User;
 use App\Form\FranchiseType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -25,7 +27,7 @@ class FranchiseController extends AbstractController
 
   ### Create Franchise ###
   #[Route(path: '/staff/create_franchise', name: 'create_franchise')]
-  public function index(Request $request)
+  public function index(Request $request, MailerInterface $mailer)
   {
     $franchise = new Franchise();
     $form = $this->createForm(FranchiseType::class, $franchise);
@@ -34,13 +36,11 @@ class FranchiseController extends AbstractController
 
     if($form->isSubmitted() && $form->isValid()) {
 
-      $userRepo = $this->em->getRepository(User::class);
-      $user = $userRepo->findOneBy(['id' => $form->getData()->getUserId()[0]->getId()]);
-
       $this->logoUrlConstructor($form, $franchise);
-      $user->setFranchise($franchise);
 
-      $this->em->persist($user);
+      $user = $form->get('user_id')->getData();
+      $mailer->send($this->createdFranchiseMailer($user));
+
       $this->em->persist($franchise);
       $this->em->flush();
 
@@ -69,13 +69,8 @@ class FranchiseController extends AbstractController
 
     if($form->isSubmitted() && $form->isValid()) {
 
-      $userRepo = $this->em->getRepository(User::class);
-      $user = $userRepo->findOneBy(['id' => $form->getData()->getUserId()[0]->getId()]);
-
       $this->logoUrlConstructor($form, $franchise);
-      $user->setFranchise($franchise);
 
-      $this->em->persist($user);
       $this->em->persist($franchise);
       $this->structurePermsSynchronizer($id);
 
@@ -106,6 +101,20 @@ class FranchiseController extends AbstractController
     $this->em->flush();
 
     return $this->redirect($this->generateUrl('staff'));
+  }
+
+  public function createdFranchiseMailer($user)
+  {
+    $email = (new TemplatedEmail())
+      ->from('justsport@gmail.com')
+      ->to($user->getEmail())
+      ->subject('Vos identifants de franchise - JustSport')
+      ->htmlTemplate('email/confirm_creation.html.twig')
+      ->context([
+        'user' => $user
+      ]);
+
+    return $email;
   }
 
   #Récupère la franchise sur laquelle on souhaite modifier ses propriétées

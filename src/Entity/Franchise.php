@@ -42,9 +42,6 @@ class Franchise
     #[ORM\Column(nullable: true)]
     private ?bool $is_active = null;
 
-    #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: User::class, cascade: ['remove'])]
-    private Collection $user_id;
-
     #[ORM\OneToMany(mappedBy: 'franchise_id', targetEntity: Structure::class, cascade: ['remove'])]
     private Collection $structures;
 
@@ -66,9 +63,11 @@ class Franchise
     #[ORM\Column(nullable: true)]
     private ?bool $create_event = null;
 
+    #[ORM\ManyToOne(inversedBy: 'franchises')]
+    private ?User $user_id = null;
+
     public function __construct()
     {
-        $this->user_id = new ArrayCollection();
         $this->structures = new ArrayCollection();
     }
 
@@ -191,36 +190,6 @@ class Franchise
     }
 
     /**
-     * @return Collection<int, User>
-     */
-    public function getUserId(): Collection
-    {
-        return $this->user_id;
-    }
-
-    public function addUserId(User $userId): self
-    {
-        if (!$this->user_id->contains($userId)) {
-            $this->user_id->add($userId);
-            $userId->setFranchise($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserId(User $userId): self
-    {
-        if ($this->user_id->removeElement($userId)) {
-            // set the owning side to null (unless already changed)
-            if ($userId->getFranchise() === $this) {
-                $userId->setFranchise(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Structure>
      */
     public function getStructures(): Collection
@@ -318,6 +287,18 @@ class Franchise
     public function setCreateEvent(?bool $create_event): self
     {
         $this->create_event = $create_event;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?User $user_id): self
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

@@ -12,6 +12,7 @@
         <img src="{{ asset('uploads/assets/branding_logo.jpg') }}" alt="welcome background image" class="branding-logo"/>
         JustSport
     </div>
+    {% if app.user %}
     <nav>
         <div id="navigation-menu">
             <div id="mySidenav" class="sidenav">
@@ -25,7 +26,7 @@
                     </svg>
                     <div class="dropdown-content">
                         <a href="{{ path('create_user') }}">Créer un utilisateur</a>
-                        <a href="{{ path('change-password') }}">Modifier le mot de passe</a>
+                        <a href="{{ path('change-password', {token : app.user.token})}}">Modifier le mot de passe</a>
                         <a href="{{ path('app_logout') }}">Deconnexion</a>
                     </div>
                 </div>
@@ -46,7 +47,7 @@
                         {% else %}
                             <a href="{{ path('structure') }}">Accueil</a>
                         {% endif%}
-                        <a href="{{ path('change-password') }}">Modifier le mot de passe</a>
+                        <a href="{{ path('change-password', {token : app.user.token})}}">Modifier le mot de passe</a>
                         <a href="{{ path('app_logout') }}">Deconnexion</a>
                     </div>
                 </div>
@@ -75,7 +76,7 @@
                             {% else %}
                                 <a href="{{ path('structure') }}">Accueil</a>
                             {% endif%}
-                            <a href="{{ path('change-password') }}">Modifier le mot de passe</a>
+                            <a href="{{ path('change-password', {token : app.user.token})}}">Modifier le mot de passe</a>
                             <a href="{{ path('app_logout') }}">Deconnexion</a>
                         </div>
                     </div>
@@ -96,7 +97,7 @@
                     </svg>
                     <div class="dropdown-content">
                         <a href="{{ path('create_user') }}">Créer un utilisateur</a>
-                        <a href="{{ path('change-password') }}">Modifier le mot de passe</a>
+                        <a href="{{ path('change-password', {token : app.user.token})}}">Modifier le mot de passe</a>
                         <a href="{{ path('app_logout') }}">Deconnexion</a>
                     </div>
                 </div>
@@ -112,7 +113,7 @@
                             {% else %}
                                 <a href="{{ path('structure') }}">Accueil</a>
                             {% endif%}
-                            <a href="{{ path('change-password') }}">Modifier le mot de passe</a>
+                            <a href="{{ path('change-password', {token : app.user.token})}}">Modifier le mot de passe</a>
                             <a href="{{ path('app_logout') }}">Deconnexion</a>
                         </div>
                     </div>
@@ -120,6 +121,7 @@
             </ul>
         </div>
     </nav>
+    {% endif %}
 </header>
     {% block content %}
 

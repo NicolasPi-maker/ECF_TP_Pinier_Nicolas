@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\FranchiseRepository;
 use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,17 +18,20 @@ class FranchiseDisplayerController extends AbstractController
   }
 
   #[Route(path: '/franchise', name: 'franchise')]
-  public function index(StructureRepository $structureRepo, Request $request)
+  public function index(
+    StructureRepository $structureRepo,
+    FranchiseRepository $franchiseRepo,
+    Request $request)
   {
     $user = $this->getUser();
-    $currentFranchise = $user->getFranchise();
+    $currentFranchise = $franchiseRepo->findOneBy(['user_id' => $user]);
 
     $structures = $structureRepo->getAllByCurrentFranchise($currentFranchise);
 
     $isFirstConnexion = $this->setLastConnexion();
 
     if($isFirstConnexion) {
-      $this->addFlash('danger', 'Veuillez modifier votre mot de passe par défaut rapidement');
+      $this->addFlash('danger', 'Si ce n\'est pas déjà fait, veuillez modifier votre mot de passe par défaut rapidement');
     }
 
     if($request->get('ajax')) {
@@ -44,12 +48,14 @@ class FranchiseDisplayerController extends AbstractController
       ]);
     }
 
-    if($currentFranchise->isIsActive()) {
-      return $this->render('customer/franchise.html.twig', [
-        'isFirstConnexion' => $isFirstConnexion,
-        'franchise' => $currentFranchise,
-        'structures' => $structures,
-      ]);
+    if($currentFranchise) {
+      if($currentFranchise->isIsActive()) {
+        return $this->render('customer/franchise.html.twig', [
+          'isFirstConnexion' => $isFirstConnexion,
+          'franchise' => $currentFranchise,
+          'structures' => $structures,
+        ]);
+      }
     }
 
     return $this->render('miscellaneous/unactivated.html.twig', [

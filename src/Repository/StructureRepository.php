@@ -115,4 +115,32 @@ class StructureRepository extends ServiceEntityRepository
         ->getArrayResult()
         ;
     }
+
+  public function structureFilteredBySearch($search = null)
+  {
+    return $this->createQueryBuilder('s')
+      ->where('s.manager_name LIKE :search_manager')
+      ->orWhere('s.structure_name LIKE :search_structure_name')
+      ->orWhere('s.structure_address LIKE :search_address')
+      ->setParameter('search_manager', '%'.$search.'%')
+      ->setParameter('search_structure_name', '%'.$search.'%')
+      ->setParameter('search_address', '%'.$search.'%')
+      ->getQuery()
+      ->getArrayResult();
+  }
+
+    public function structureFilteredBySearchAndByFranchise($search = null, $franchiseId = null)
+    {
+      return $this->createQueryBuilder('s')
+        ->where('s.manager_name LIKE :search_manager')
+        ->orWhere('s.structure_name LIKE :search_structure_name')
+        ->orWhere('s.structure_address LIKE :search_address')
+        ->andWhere('s.franchise_id = :franchiseId')
+        ->setParameter('franchiseId', $franchiseId)
+        ->setParameter('search_manager', '%'.$search.'%')
+        ->setParameter('search_structure_name', '%'.$search.'%')
+        ->setParameter('search_address', '%'.$search.'%')
+        ->getQuery()
+        ->getArrayResult();
+    }
 }

@@ -5,8 +5,20 @@ main {
   flex-direction: column;
 }
 
+.title-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4em;
+}
+
+.title-wrapper > h1 > span {
+  color: #d12e67;
+}
+
 .main-title {
-  margin: 2em 1em 2em 1em;
+  margin: 2em 1em 0 1em;
   text-align: center;
 }
 

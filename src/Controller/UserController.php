@@ -2,19 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Franchise;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class UserController extends AbstractController
 {
@@ -28,7 +26,7 @@ class UserController extends AbstractController
   public function createUser(
     Request $request,
     UserPasswordHasherInterface $passwordEncoder,
-    MailerInterface $mailer
+    TokenGeneratorInterface $tokenGenerator,
   ): Response
   {
     $entity = new User();
@@ -38,17 +36,12 @@ class UserController extends AbstractController
 
     if($form->isSubmitted() && $form->isValid()) {
 
-      $franchiseId = null;
-
-      if($form->getData()->getFranchise()) {
-        $franchiseId = $form->getData()->getFranchise()->getId();
-      }
-
       $passwordBeforeHash = $form->getData()->getPassword();
       $hashedPassword = $passwordEncoder->hashPassword($entity, $passwordBeforeHash);
 
       try {
-        $mailer->send($this->userCreatedMailer($entity));
+        $token = $tokenGenerator->generateToken();
+        $entity->setToken($token);
 
         $entity->setPassword($hashedPassword);
 
@@ -65,32 +58,11 @@ class UserController extends AbstractController
       }
 
       $this->addFlash('success', 'L\'utilisateur a bien été crée');
-      return $this->redirectToRoute('create_structure', ['id' => $franchiseId]);
+      return $this->redirectToRoute('staff');
     }
 
     return $this->render('forms/user_form.html.twig', [
       'form' => $form->createView(),
     ]);
-  }
-
-  public function userCreatedMailer($entity)
-  {
-    $subject = 'Vos identifants de franchise - JustSport';
-
-    if($entity->getRoles() !== 'ROLE_FRANCHISE') {
-      $subject = 'Vos identifiants de structure - JustSport';
-    }
-
-    $email = (new TemplatedEmail())
-      ->from('justsport@gmail.com')
-      ->to($entity->getEmail())
-      ->to()
-      ->subject($subject)
-      ->htmlTemplate('email/confirm_created_account.html.twig')
-      ->context([
-        'user' => $entity
-      ]);
-
-    return $email;
   }
 }

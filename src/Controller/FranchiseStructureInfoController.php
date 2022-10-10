@@ -28,6 +28,13 @@ class FranchiseStructureInfoController extends AbstractController
     $franchiseRepo = $this->em->getRepository(Franchise::class);
     $currentFranchise = $franchiseRepo->findOneBy(['id' => $id]);
 
+    if(isset($_POST['btn-switch-active'])) {
+      $this->updateActive();
+      return $this->redirectToRoute('franchise_structure_info', [
+        'id' => $id,
+      ]);
+    }
+
     $structureRepo = $this->em->getRepository(Structure::class);
     $structures = $structureRepo->getAllByCurrentFranchise($id);
 
@@ -41,6 +48,12 @@ class FranchiseStructureInfoController extends AbstractController
         $filter = $request->get('filter');
         $structures = $structureRepo->structureFilteredByFranchise($currentFranchise, $filter);
       }
+
+      if($request->get('search_filter') !== null) {
+        $searchFilter = $request->get('search_filter');
+        $structures = $structureRepo->structureFilteredBySearchAndByFranchise($searchFilter, $currentFranchise);
+      }
+
       return new JsonResponse([
         'content'=> $this->renderView('structure/_structure_card.html.twig', [
           'structures' => $structures,
@@ -94,6 +107,19 @@ class FranchiseStructureInfoController extends AbstractController
         $currentStructure->$key($change[1]);
       }
       $this->em->persist($currentStructure);
+    }
+  }
+
+  public function updateActive()
+  {
+    $structureRepo = $this->em->getRepository(Structure::class);
+
+    if(isset($_POST['structureId'])) {
+      $currentStructure = $structureRepo->findOneBy(['id' => $_POST['structureId']]);
+      $currentStructure->setIsActive(!$currentStructure->isIsActive());
+
+      $this->em->persist($currentStructure);
+      $this->em->flush();
     }
   }
 }

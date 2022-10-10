@@ -35,15 +35,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $last_connexion = null;
 
-    #[ORM\ManyToOne(inversedBy: 'user_id')]
-    private ?Franchise $franchise = null;
-
     #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Structure::class)]
     private Collection $structures;
+
+    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Franchise::class)]
+    private Collection $franchises;
+
+    #[ORM\Column(type: Types::GUID)]
+    private ?string $token = null;
 
     public function __construct()
     {
         $this->structures = new ArrayCollection();
+        $this->franchises = new ArrayCollection();
     }
 
     public function __toString()
@@ -133,18 +137,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFranchise(): ?Franchise
-    {
-        return $this->franchise;
-    }
-
-    public function setFranchise(?Franchise $franchise): self
-    {
-        $this->franchise = $franchise;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Structure>
      */
@@ -171,6 +163,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $structure->setUserId(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Franchise>
+     */
+    public function getFranchises(): Collection
+    {
+        return $this->franchises;
+    }
+
+    public function addFranchise(Franchise $franchise): self
+    {
+        if (!$this->franchises->contains($franchise)) {
+            $this->franchises->add($franchise);
+            $franchise->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFranchise(Franchise $franchise): self
+    {
+        if ($this->franchises->removeElement($franchise)) {
+            // set the owning side to null (unless already changed)
+            if ($franchise->getUserId() === $this) {
+                $franchise->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }

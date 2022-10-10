@@ -7,9 +7,12 @@
     <link href="{{ asset('css/staff.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('css/_card.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('css/_modal.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/_flash.css') }}" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
 {% block content %}
+    {% include "_partials/_flash.html.twig" %}
+
     <div id="filter-wrapper">
         {% include 'filters/filters.html.twig' %}
     </div>
@@ -33,8 +36,10 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/burgerMenu.js') }}"></script>
-    <script src="{{ asset('js/onLoad.js') }}"></script>
+    <script src="{{ asset('js/_flash.js') }}"></script>
     <script src="{{ asset('js/radioButtonFilter.js') }}"></script>
     <script src="{{ asset('js/searchBarFilter.js') }}"></script>
     <script src="{{ asset('js/modalTrigger.js') }}"></script>
+    <script src="{{ asset('js/onLoad.js') }}"></script>
 {% endblock %}
+

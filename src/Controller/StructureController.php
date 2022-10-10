@@ -6,6 +6,7 @@ use App\Entity\Franchise;
 use App\Entity\Structure;
 use App\Form\StructureType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -32,6 +34,11 @@ class StructureController extends AbstractController
 
     $structures = $structureRepo->getAll();
 
+    if(isset($_POST['btn-switch-active'])) {
+      $this->updateActive();
+      return $this->redirectToRoute('staff_structure');
+    }
+
     if($request->get('ajax')) {
       if($request->get('filter') === 'all') {
         $structures = $structureRepo->getAll();
@@ -39,6 +46,12 @@ class StructureController extends AbstractController
         $filter = $request->get('filter');
         $structures = $structureRepo->structureFiltered($filter);
       }
+
+      if($request->get('search_filter') !== null) {
+        $searchFilter = $request->get('search_filter');
+        $structures = $structureRepo->structureFilteredBySearch($searchFilter);
+      }
+
       return new JsonResponse([
         'content'=> $this->renderView('structure/_structure_card.html.twig', [
           'structures' => $structures,
@@ -53,7 +66,12 @@ class StructureController extends AbstractController
 
   ### Create Structure ###
   #[Route(path: '/staff/franchise:{id}/create_structure', name: 'create_structure')]
-  public function createStructure(Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger, int $id)
+  public function createStructure(
+    Request $request,
+    ManagerRegistry $doctrine,
+    int $id,
+    MailerInterface $mailer,
+  )
   {
     $franchiseRepo = $doctrine->getRepository(Franchise::class);
     $linkedFranchise = $franchiseRepo->findOneBy(['id' => $id]);
@@ -66,6 +84,13 @@ class StructureController extends AbstractController
     if($form->isSubmitted() && $form->isValid()) {
 
       $this->logoUrlConstructor($form, $structure);
+
+      $user = $form->get('user_id')->getData();
+      # Send mail to structure manager with credentials #
+      $mailer->send($this->createdStructureMailer($user));
+
+      # Send mail to linked franchise manager to notify about structure creation  #
+      $mailer->send($this->createdStructureFranchiseMailer($linkedFranchise, $structure));
 
       $entityManager = $doctrine->getManager();
 
@@ -85,6 +110,7 @@ class StructureController extends AbstractController
 
     return $this->render('forms/structure_form.html.twig', [
       'form' => $form->createView(),
+      'franchise' => $linkedFranchise,
     ]);
   }
 
@@ -137,6 +163,34 @@ class StructureController extends AbstractController
     return $this->redirect($this->generateUrl('staff'));
   }
 
+  public function createdStructureMailer($user)
+  {
+    $emailToStructure = (new TemplatedEmail())
+      ->from('justsport@gmail.com')
+      ->to($user->getEmail())
+      ->subject('Vos identifants de structure - JustSport')
+      ->htmlTemplate('email/confirm_creation.html.twig')
+      ->context([
+        'user' => $user
+      ]);
+
+    return $emailToStructure;
+  }
+
+  public function createdStructureFranchiseMailer($linkedFranchise, $structure)
+  {
+    $emailToFranchise = (new TemplatedEmail())
+      ->from('justsport@gmail.com')
+      ->to($linkedFranchise->getUserId()->getEmail())
+      ->subject('Une nouvelle structure a été créée pour votre franchise - JustSport')
+      ->htmlTemplate('email/confirm_created_structure.html.twig')
+      ->context([
+        'structure' => $structure
+      ]);
+
+    return $emailToFranchise;
+  }
+
   #Récupère la structure sur laquelle on souhaite modifier ses propriétées
   public function getSelectedStructure($id)
   {
@@ -164,6 +218,19 @@ class StructureController extends AbstractController
       } catch (FileException $e) {
         echo $e;
       }
+    }
+  }
+
+  public function updateActive()
+  {
+    $structureRepo = $this->em->getRepository(Structure::class);
+
+    if(isset($_POST['structureId'])) {
+      $currentStructure = $structureRepo->findOneBy(['id' => $_POST['structureId']]);
+      $currentStructure->setIsActive(!$currentStructure->isIsActive());
+
+      $this->em->persist($currentStructure);
+      $this->em->flush();
     }
   }
 }

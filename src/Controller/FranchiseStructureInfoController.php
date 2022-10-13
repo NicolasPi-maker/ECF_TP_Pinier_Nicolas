@@ -29,11 +29,13 @@ class FranchiseStructureInfoController extends AbstractController
     $currentFranchise = $franchiseRepo->findOneBy(['id' => $id]);
 
     if(isset($_POST['btn-switch-active'])) {
-      $this->updateActive();
+      $this->updateFranchiseActive();
+      $this->updateStructureActive();
       return $this->redirectToRoute('franchise_structure_info', [
         'id' => $id,
       ]);
     }
+
 
     $structureRepo = $this->em->getRepository(Structure::class);
     $structures = $structureRepo->getAllByCurrentFranchise($id);
@@ -110,7 +112,7 @@ class FranchiseStructureInfoController extends AbstractController
     }
   }
 
-  public function updateActive()
+  public function updateStructureActive()
   {
     $structureRepo = $this->em->getRepository(Structure::class);
 
@@ -119,6 +121,19 @@ class FranchiseStructureInfoController extends AbstractController
       $currentStructure->setIsActive(!$currentStructure->isIsActive());
 
       $this->em->persist($currentStructure);
+      $this->em->flush();
+    }
+  }
+
+  public function updateFranchiseActive()
+  {
+    $franchiseRepo = $this->em->getRepository(Franchise::class);
+
+    if(isset($_POST['franchiseId'])) {
+      $currentFranchise = $franchiseRepo->findOneBy(['id' => $_POST['franchiseId']]);
+      $currentFranchise->setIsActive(!$currentFranchise->isIsActive());
+
+      $this->em->persist($currentFranchise);
       $this->em->flush();
     }
   }

@@ -7,9 +7,12 @@ use App\Entity\Structure;
 use App\Repository\FranchiseRepository;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Mailer\Exception\ExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 
-class StructureUpdateEventListener
+class StructureUpdateEventListener extends AbstractController
 {
   public function __construct(FranchiseRepository $franchiseRepository, MailerInterface $mailer)
   {
@@ -38,7 +41,13 @@ class StructureUpdateEventListener
         'structure' => $structure
       ]);
 
-    $this->mailer->send($structureEmail);
-    $this->mailer->send($emailToFranchise);
+
+    try {
+      $this->mailer->send($structureEmail);
+      $this->mailer->send($emailToFranchise);
+      $this->addFlash('warning', 'La structure'.$structure->getStructureName().' a bien été modifiée');
+    } catch (ExceptionInterface $e) {
+      throw new Exception($e);
+    }
   }
 }

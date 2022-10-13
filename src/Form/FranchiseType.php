@@ -25,6 +25,7 @@ class FranchiseType extends AbstractType
             ->add('logo_url', FileType::class, [
               'data_class' => null,
               'required' => false,
+              'mapped' => false,
             ])
             ->add('technical_contact', EmailType::class)
             ->add('commercial_contact', EmailType::class)

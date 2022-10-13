@@ -9,10 +9,39 @@
     <link href="{{ asset('css/franchise_structure_info.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('css/_structure_card.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('css/_modal.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/_flash.css') }}" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
 {% block content %}
     <main>
+        {% include "_partials/_flash.html.twig" %}
+
+        <!-- The Modal to confirm submit -->
+        <div class="updateActive modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                {% if franchise.isIsactive == 1 %}
+                <p class="modal-text">Voulez-vous confirmer la <span class="highlight-desactive">désactivation</span> de la franchise de {{ franchise.getClientName}} ? </p>
+                {% else %}
+                <p class="modal-text">Voulez-vous confirmer <span class="highlight-active">l'activation</span> de la franchise de {{ franchise.getClientName}} ?<p>
+                    {% endif %}
+                <div class="button-wrapper">
+                    <form method="post" class="form-button update-active-button">
+                        <input type="hidden" name="franchiseId" value={{ franchise.getId }}>
+                        <input
+                                type="submit"
+                                value="Confirmer"
+                                name="btn-switch-active"
+                                class="input-active"
+                        />
+                    </form>
+                    <button class="form-button close-button">
+                        Annuler
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <section id="franchise-branding">
             <img src="{{asset('uploads/import/'~ franchise.getLogoUrl )}}" alt="franchise logo branding" class="franchise-logo">
             <h1 id="main-title">{{ franchise.getClientName }}</h1>
@@ -55,7 +84,7 @@
             <div class="toggle-btn-wrapper">
                 <div class="form-input slider-block">
                     <label class="switch">
-                        <input type="checkbox" class="switch global" value="{{ franchise.isIsactive }}" id="{{ franchise.getId }}">
+                        <input type="checkbox" class="switch global btn-update-structure" value="{{ franchise.isIsactive }}" id="{{ franchise.getId }}">
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -110,9 +139,11 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/_flash.js') }}"></script>
     <script src="{{ asset('js/burgerMenu.js') }}"></script>
     <script src="{{ asset('js/onLoad.js') }}"></script>
-    <script src="{{ asset('js/modalTrigger.js') }}"></script>
     <script src="{{ asset('js/radioButtonFilter.js') }}"></script>
     <script src="{{ asset('js/searchBarFilter.js') }}"></script>
+    <script src="{{ asset('js/checkActiveStatut.js') }}"></script>
+    <script src="{{ asset('js/modalTrigger.js') }}"></script>
 {% endblock %}

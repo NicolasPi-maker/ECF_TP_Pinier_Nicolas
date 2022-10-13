@@ -17,7 +17,11 @@ class StructureType extends AbstractType
             ->add('structure_address')
             ->add('manager_name')
             ->add('user_id')
-            ->add('logo_url', FileType::class, array('data_class' => null))
+            ->add('logo_url', FileType::class, [
+              'data_class' => null,
+              'required' => false,
+              'mapped' => false,
+            ])
             ->add('url')
             ->add('is_active')
         ;

@@ -9,10 +9,12 @@
     <link href="{{ asset('css/franchise_structure_info.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('css/_structure_card.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('css/_modal.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/_flash.css') }}" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
 {% block content %}
     <main>
+        {% include "_partials/_flash.html.twig" %}
         <section id="filter-wrapper">
             {% include 'filters/filters.html.twig' %}
         </section>
@@ -29,4 +31,5 @@
     <script src="{{ asset('js/radioButtonFilter.js') }}"></script>
     <script src="{{ asset('js/checkActiveStatut.js') }}"></script>
     <script src="{{ asset('js/searchBarFilter.js') }}"></script>
+    <script src="{{ asset('js/_flash.js') }}"></script>
 {% endblock %}

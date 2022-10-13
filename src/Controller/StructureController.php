@@ -83,7 +83,8 @@ class StructureController extends AbstractController
 
     if($form->isSubmitted() && $form->isValid()) {
 
-      $this->logoUrlConstructor($form, $structure);
+      $logoFile = $form->get('logo_url')->getData();
+      $this->logoUrlConstructor($structure, $logoFile);
 
       $user = $form->get('user_id')->getData();
       # Send mail to structure manager with credentials #
@@ -104,6 +105,8 @@ class StructureController extends AbstractController
 
       $entityManager->persist($structure);
       $entityManager->flush();
+
+      $this->addFlash('success', 'La structure '.$structure->getStructureName().' a bien été crée');
 
       return $this->redirect($this->generateUrl('staff'));
     }
@@ -131,7 +134,13 @@ class StructureController extends AbstractController
 
     if($form->isSubmitted() && $form->isValid() ) {
 
-      $this->logoUrlConstructor($form, $structure);
+      $logoFile = $form->get('logo_url')->getData();
+
+      if($logoFile !== null) {
+        $this->logoUrlConstructor($structure, $logoFile);
+      }
+
+      $structure->setLogoUrl($structure->getLogoUrl());
 
       $this->em->persist($structure);
       $this->em->flush();
@@ -149,16 +158,18 @@ class StructureController extends AbstractController
   #[Route(path: '/delete/structure/{id}', name: 'remove_structure')]
   public function removeFranchise($id)
   {
-    $franchise = $this->getSelectedStructure($id);
+    $structure = $this->getSelectedStructure($id);
 
-    if (!$franchise) {
+    if (!$structure) {
       throw $this->createNotFoundException(
         'Aucune franchise n\'existe avec l\'identifiant suivant' . $id
       );
     }
 
-    $this->em->remove($franchise);
+    $this->em->remove($structure);
     $this->em->flush();
+
+    $this->addFlash('danger', 'La structure '.$structure->getStructureName().' a bien été supprimée');
 
     return $this->redirect($this->generateUrl('staff'));
   }
@@ -199,9 +210,9 @@ class StructureController extends AbstractController
   }
 
   #Format et envoie les fichiers image pour le logo au bon endroit
-  public function logoUrlConstructor(FormInterface $form, Structure $structure)
+  public function logoUrlConstructor(Structure $structure, $logoFile)
   {
-    $logoFile = $form->get('logo_url')->getData();
+
 
     if($logoFile) {
       $originalFileName = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);

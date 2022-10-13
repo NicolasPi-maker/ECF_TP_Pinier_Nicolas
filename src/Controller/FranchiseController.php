@@ -36,13 +36,16 @@ class FranchiseController extends AbstractController
 
     if($form->isSubmitted() && $form->isValid()) {
 
-      $this->logoUrlConstructor($form, $franchise);
+      $logoFile = $form->get('logo_url')->getData();
+      $this->logoUrlConstructor($franchise, $logoFile);
 
       $user = $form->get('user_id')->getData();
       $mailer->send($this->createdFranchiseMailer($user));
 
       $this->em->persist($franchise);
       $this->em->flush();
+
+      $this->addFlash('success', 'La franchise '.$franchise->getClientName().' a bien été crée');
 
       return $this->redirect($this->generateUrl('staff'));
     }
@@ -69,7 +72,13 @@ class FranchiseController extends AbstractController
 
     if($form->isSubmitted() && $form->isValid()) {
 
-      $this->logoUrlConstructor($form, $franchise);
+      $logoFile = $form->get('logo_url')->getData();
+
+      if($logoFile !== null) {
+        $this->logoUrlConstructor($franchise, $logoFile);
+      }
+
+      $franchise->setLogoUrl($franchise->getLogoUrl());
 
       $this->em->persist($franchise);
       $this->structurePermsSynchronizer($id);
@@ -100,6 +109,8 @@ class FranchiseController extends AbstractController
     $this->em->remove($franchise);
     $this->em->flush();
 
+    $this->addFlash('danger', 'La franchise '.$franchise->getClientName().' a bien été supprimée');
+
     return $this->redirect($this->generateUrl('staff'));
   }
 
@@ -125,9 +136,8 @@ class FranchiseController extends AbstractController
   }
 
   #Format et envoie les fichiers image pour le logo au bon endroit
-  public function logoUrlConstructor(FormInterface $form, Franchise $franchise)
+  public function logoUrlConstructor(Franchise $franchise, $logoFile)
   {
-    $logoFile = $form->get('logo_url')->getData();
 
     if($logoFile) {
       $originalFileName = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);

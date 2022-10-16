@@ -24,7 +24,7 @@ class ChangePasswordType extends AbstractType
                   ]),
                   new Regex([
                     'pattern' => '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$^',
-                    'message' => 'Ce mot de passe n\'est pas assez fort il doit contenir :'
+                    'message' => 'Ce mot de passe n\'est pas assez fort.'
                   ])
                 ],
             ])

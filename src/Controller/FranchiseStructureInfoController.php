@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Franchise;
 use App\Entity\Structure;
 use App\Form\FranchisePermissionsType;
+use App\Form\StructurePermissionsType;
+use App\Form\StructureType;
 use App\Repository\StructureRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
@@ -36,9 +38,11 @@ class FranchiseStructureInfoController extends AbstractController
       ]);
     }
 
-
     $structureRepo = $this->em->getRepository(Structure::class);
     $structures = $structureRepo->getAllByCurrentFranchise($id);
+
+    $structureForm = $this->createForm(StructurePermissionsType::class);
+    $structureForm->handleRequest($request);
 
     $franchiseForm = $this->createForm(FranchisePermissionsType::class, $currentFranchise);
     $franchiseForm->handleRequest($request);
@@ -60,9 +64,27 @@ class FranchiseStructureInfoController extends AbstractController
         'content'=> $this->renderView('structure/_structure_card.html.twig', [
           'structures' => $structures,
           'franchise' => $currentFranchise,
+          'structureForm' => $structureForm->createView(),
         ])
       ]);
     }
+
+    if($structureForm->isSubmitted() && $structureForm) {
+      if(isset($_POST['structureId'])) {
+        $currentStructure = $structureRepo->findOneBy(['id'=> $_POST['structureId']]);
+
+        $currentStructure->setSellDrink($structureForm->get('sell_drink')->getData());
+        $currentStructure->setManageSchedule($structureForm->get('manage_schedule')->getData());
+        $currentStructure->setCreateNewsletter($structureForm->get('create_newsletter')->getData());
+        $currentStructure->setCreateEvent($structureForm->get('create_event')->getData());
+        $currentStructure->setAddPromotion($structureForm->get('add_promotion')->getData());
+        $currentStructure->setSellFood($structureForm->get('sell_food')->getData());
+
+        $this->em->persist($currentStructure);
+        $this->em->flush();
+      }
+    }
+
 
     if($franchiseForm->isSubmitted() && $franchiseForm->isValid()) {
 
@@ -76,6 +98,7 @@ class FranchiseStructureInfoController extends AbstractController
       'franchise' => $currentFranchise,
       'structures' => $structures,
       'form' => $franchiseForm->createView(),
+      'structureForm' => $structureForm->createView(),
     ]);
   }
 

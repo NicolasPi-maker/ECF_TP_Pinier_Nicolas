@@ -165,7 +165,34 @@ header {
   display: none;
 }
 
-@media screen and (min-width: 1160px) {
+/* ipad landscape breakpoint */
+@media screen and (min-width: 1180px) {
+  .branding-logo {
+    font-size: 2em;
+    min-width: 115px;
+  }
+
+  .dropbtn {
+    min-width: 3em;
+    min-height: 3em;
+  }
+
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    font-size: 1em;
+  }
+
+  .dropdown-customer {
+    min-width: 15em;
+  }
+}
+
+/* desktop breakpoint */
+@media screen and (min-width: 1460px) {
+  .branding-logo {
+    font-size: 2em;
+  }
+
   #navigation-menu {
     display: none;
   }

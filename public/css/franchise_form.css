@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 main {
   min-height: 90vh;
   display: flex;
@@ -50,6 +52,7 @@ form {
 }
 
 .form-input > * {
+  font-family: 'Roboto', sans-serif;
   border-radius: 20px;
   border-color: lightsalmon;
   min-width: 80vw;
@@ -57,8 +60,10 @@ form {
   font-size: 2em;
 }
 
-.message > * {
-  height: 9em;
+.message {
+  height: 15em;
+  resize: none;
+  font-size: 1em;
 }
 
 .franchise-logo {
@@ -90,11 +95,12 @@ form {
   flex-direction: column;
   text-align: center;
   align-items: center;
+  justify-content: center;
   transition: ease-in .2s;
   font-size: 2em;
   color: #ff5a79;
   max-width: 80vw;
-  margin-bottom: 1em;
+  margin: 1em 0;
 }
 
 .form-error > * {
@@ -209,4 +215,92 @@ form {
 
 #user_franchise {
  font-size: 0.8em;
+}
+
+/* ipad landscape breakpoint */
+@media screen and (min-width: 1180px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.7em;
+  }
+
+  .form-label > * {
+    font-size: 1.5em;
+  }
+
+  .form-input > * {
+    padding-left: 0.5em;
+    min-width: 60vw;
+    min-height: 2.25em;
+    font-size: 1em;
+  }
+
+  .message {
+    height: 10em;
+    font-size: 1em;
+    resize: none;
+  }
+
+  .franchise-logo {
+    max-width: 150px;
+    max-height: 150px;
+  }
+
+  .slider-block {
+    position: relative;
+    display: inline-block;
+    width: 70px;
+    height: 35px;
+  }
+
+  .slider:before {
+    height: 30px;
+    width: 30px;
+    left: 2px;
+    bottom: 2px;
+  }
+  .switch > input:checked + .slider:before {
+    transform: translateX(35px);
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-button {
+    width: 50%;
+    height: 2em;
+    font-size: 2em;
+  }
+
+  .form-error {
+    font-size: 1em;
+    max-width: 60vw;
+  }
+
+  .row-error {
+    flex-direction: row;
+  }
+
+  .row-error > * {
+    margin-right: 1em;
+  }
+}
+
+/* desktop breakpoint */
+@media screen and (min-width: 1460px) {
+
+  .form-label > * {
+    font-size: 1.25em;
+  }
+
+  .form-input > * {
+    min-width: 40vw;
+    min-height: 2.25em;
+    font-size: 1em;
+  }
 }

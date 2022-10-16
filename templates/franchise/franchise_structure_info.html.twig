@@ -41,91 +41,93 @@
                 </div>
             </div>
         </div>
-
         <section id="franchise-branding">
             <img src="{{asset('uploads/import/'~ franchise.getLogoUrl )}}" alt="franchise logo branding" class="franchise-logo">
             <h1 id="main-title">{{ franchise.getClientName }}</h1>
             <a href="{{ franchise.getUrl }}" class="franchise-url">{{ franchise.getUrl }}</a>
         </section>
-        <section class="franchise-info-wrapper">
-            <ul class="franchise-main-info">
-                <li>
-                    <div class="customer_address">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8Z"/></g>
-                        </svg>
-                        <p>{{ franchise.getClientAddress }}</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="contact-email">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
-                            <g fill="currentColor">
-                                <path d="M28.354 1.354a.5.5 0 0 0-.141-.805a5.984 5.984 0 0 0-6.798 1.191c-1.698 1.709-2.291 4.393-1.499 6.637L8.377 19.916a5.908 5.908 0 0 0-1.996-.336c-1.714 0-3.376.682-4.559 1.872a6.082 6.082 0 0 0-1.281 6.747a.498.498 0 0 0 .813.153l3.491-3.509c.23-.232.601-.263.793-.068l1.507 1.577c.219.221.209.562-.022.795l-3.478 3.5a.499.499 0 0 0 .141.804a6.034 6.034 0 0 0 2.591.588c1.572 0 3.065-.632 4.207-1.78c1.698-1.708 2.291-4.392 1.498-6.636l11.539-11.54a5.918 5.918 0 0 0 1.997.336c1.714 0 3.376-.682 4.559-1.872A6.082 6.082 0 0 0 31.458 3.8a.498.498 0 0 0-.813-.153l-3.491 3.509a.569.569 0 0 1-.801-.01l-1.499-1.499a.551.551 0 0 1-.001-.794l3.501-3.499zm-4.208 5l1.499 1.499c.599.602 1.625.605 2.218.009l2.93-2.944a5.091 5.091 0 0 1-1.324 4.926c-.997 1.003-2.399 1.577-3.85 1.577c-.683 0-1.33-.128-1.923-.38a.5.5 0 0 0-.549.106l-12 12a.499.499 0 0 0-.107.547c.803 1.91.314 4.375-1.163 5.861a4.956 4.956 0 0 1-4.985 1.258l2.941-2.96c.621-.625.631-1.594.029-2.198l-1.506-1.577c-.581-.585-1.614-.549-2.218.062l-2.93 2.944a5.091 5.091 0 0 1 1.324-4.926c.997-1.003 2.399-1.577 3.85-1.577c.683 0 1.33.128 1.923.38a.498.498 0 0 0 .549-.106l12-12a.499.499 0 0 0 .107-.547c-.803-1.91-.314-4.376 1.163-5.862a4.957 4.957 0 0 1 4.982-1.258l-2.96 2.961a1.546 1.546 0 0 0 0 2.205z"/><path d="M29.21 30.647a.595.595 0 0 1-.827-.002l-10.03-10a.501.501 0 0 0-.706.709l10.029 9.998c.3.301.698.467 1.122.467c.424 0 .822-.166 1.128-.474l1.429-1.493a1.549 1.549 0 0 0-.001-2.206l-10-10a.5.5 0 0 0-.707.707l9.999 9.999c.229.23.229.564-.007.802l-1.429 1.493zM5.854 3.146l-3-3a.5.5 0 0 0-.707 0l-2 2a.5.5 0 0 0 0 .707l3 3a.502.502 0 0 0 .707.001l.646-.647l7.646 7.646a.5.5 0 1 0 .708-.706L5.207 4.5l.646-.646a.5.5 0 0 0 .001-.708zM3.5 4.793L1.207 2.5L2.5 1.207L4.793 3.5L3.5 4.793z"/>
-                            </g>
-                        </svg>
-                        <p>{{ franchise.getTechnicalContact}}</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="contact-email">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
-                            <path fill="currentColor" d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5l39.3-50.5l42.8 33.3h643.1l42.8-33.3l39.3 50.5l-27.7 21.5zM833.6 232L512 482L190.4 232l-42.8-33.3l-39.3 50.5l27.6 21.5l341.6 265.6a55.99 55.99 0 0 0 68.7 0L888 270.8l27.6-21.5l-39.3-50.5l-42.7 33.2z"/>
-                        </svg>
-                        <p>{{ franchise.getCommercialContact }}</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="full-description">
-                        <p>{{ franchise.getFullDescription }}</p>
-                    </div>
-                </li>
-            </ul>
-            <div class="toggle-btn-wrapper">
-                <div class="form-input slider-block">
-                    <label class="switch">
-                        <input type="checkbox" class="switch global btn-update-structure" value="{{ franchise.isIsactive }}" id="{{ franchise.getId }}">
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-            </div>
-        </section>
-        <section class="franchise-permissions">
-            <h2>Permissions globales</h2>
-            <section>
-                {{ form_start(form, {'attr': {'id': 'form-container'}}) }}
-                {% include 'forms/franchise_permissions.html.twig'%}
-                    <!-- The Modal to confirm submit -->
-                    <div id="globalPermsModal" class="global-perm-modal">
-
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                                <p class="modal-text">Souhaitez vous confirmer les modifications de la franchise {{ franchise.getClientName}} ({{franchise.getUrl }})</p>
-                            <div class="button-wrapper">
-                                <button class="form-button btn-confirm-perms" type="submit">
-                                    Modifier
-                                </button>
-                                    <p id="close-global-perms">Annuler</p>
-                            </div>
+        <div class="franchise-wrapper">
+            <section class="franchise-info-wrapper">
+                <ul class="franchise-main-info">
+                    <li>
+                        <div class="customer_address">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8Z"/></g>
+                            </svg>
+                            <p>{{ franchise.getClientAddress }}</p>
                         </div>
+                    </li>
+                    <li>
+                        <div class="contact-email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+                                <g fill="currentColor">
+                                    <path d="M28.354 1.354a.5.5 0 0 0-.141-.805a5.984 5.984 0 0 0-6.798 1.191c-1.698 1.709-2.291 4.393-1.499 6.637L8.377 19.916a5.908 5.908 0 0 0-1.996-.336c-1.714 0-3.376.682-4.559 1.872a6.082 6.082 0 0 0-1.281 6.747a.498.498 0 0 0 .813.153l3.491-3.509c.23-.232.601-.263.793-.068l1.507 1.577c.219.221.209.562-.022.795l-3.478 3.5a.499.499 0 0 0 .141.804a6.034 6.034 0 0 0 2.591.588c1.572 0 3.065-.632 4.207-1.78c1.698-1.708 2.291-4.392 1.498-6.636l11.539-11.54a5.918 5.918 0 0 0 1.997.336c1.714 0 3.376-.682 4.559-1.872A6.082 6.082 0 0 0 31.458 3.8a.498.498 0 0 0-.813-.153l-3.491 3.509a.569.569 0 0 1-.801-.01l-1.499-1.499a.551.551 0 0 1-.001-.794l3.501-3.499zm-4.208 5l1.499 1.499c.599.602 1.625.605 2.218.009l2.93-2.944a5.091 5.091 0 0 1-1.324 4.926c-.997 1.003-2.399 1.577-3.85 1.577c-.683 0-1.33-.128-1.923-.38a.5.5 0 0 0-.549.106l-12 12a.499.499 0 0 0-.107.547c.803 1.91.314 4.375-1.163 5.861a4.956 4.956 0 0 1-4.985 1.258l2.941-2.96c.621-.625.631-1.594.029-2.198l-1.506-1.577c-.581-.585-1.614-.549-2.218.062l-2.93 2.944a5.091 5.091 0 0 1 1.324-4.926c.997-1.003 2.399-1.577 3.85-1.577c.683 0 1.33.128 1.923.38a.498.498 0 0 0 .549-.106l12-12a.499.499 0 0 0 .107-.547c-.803-1.91-.314-4.376 1.163-5.862a4.957 4.957 0 0 1 4.982-1.258l-2.96 2.961a1.546 1.546 0 0 0 0 2.205z"/><path d="M29.21 30.647a.595.595 0 0 1-.827-.002l-10.03-10a.501.501 0 0 0-.706.709l10.029 9.998c.3.301.698.467 1.122.467c.424 0 .822-.166 1.128-.474l1.429-1.493a1.549 1.549 0 0 0-.001-2.206l-10-10a.5.5 0 0 0-.707.707l9.999 9.999c.229.23.229.564-.007.802l-1.429 1.493zM5.854 3.146l-3-3a.5.5 0 0 0-.707 0l-2 2a.5.5 0 0 0 0 .707l3 3a.502.502 0 0 0 .707.001l.646-.647l7.646 7.646a.5.5 0 1 0 .708-.706L5.207 4.5l.646-.646a.5.5 0 0 0 .001-.708zM3.5 4.793L1.207 2.5L2.5 1.207L4.793 3.5L3.5 4.793z"/>
+                                </g>
+                            </svg>
+                            <p>{{ franchise.getTechnicalContact}}</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="contact-email">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024">
+                                <path fill="currentColor" d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5l39.3-50.5l42.8 33.3h643.1l42.8-33.3l39.3 50.5l-27.7 21.5zM833.6 232L512 482L190.4 232l-42.8-33.3l-39.3 50.5l27.6 21.5l341.6 265.6a55.99 55.99 0 0 0 68.7 0L888 270.8l27.6-21.5l-39.3-50.5l-42.7 33.2z"/>
+                            </svg>
+                            <p>{{ franchise.getCommercialContact }}</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="full-description">
+                            <p>{{ franchise.getFullDescription }}</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="toggle-btn-wrapper">
+                    <div class="form-input slider-block">
+                        <label class="switch">
+                            <input type="checkbox" class="switch global btn-update-structure" value="{{ franchise.isIsactive }}" id="{{ franchise.getId }}">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
-                {{ form_end(form) }}
-                <div class="button-wrapper">
-                    <button id="btn-global-perms" class="form-button">Modifier</button>
                 </div>
             </section>
-        </section>
+            <section class="franchise-permissions">
+                <h2 class="global-perm-title">Permissions globales</h2>
+                <section>
+                    {{ form_start(form, {'attr': {'id': 'form-container'}}) }}
+                    {% include 'forms/franchise_permissions.html.twig'%}
+                        <!-- The Modal to confirm submit -->
+                        <div id="globalPermsModal" class="global-perm-modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                    <p class="modal-text">Souhaitez vous confirmer les modifications de la franchise {{ franchise.getClientName}} ({{franchise.getUrl }})</p>
+                                <div class="button-wrapper">
+                                    <button class="form-button btn-confirm-perms" type="submit">
+                                        Modifier
+                                    </button>
+                                        <p id="close-global-perms">Annuler</p>
+                                </div>
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+                    <div class="button-wrapper">
+                        <button id="btn-global-perms" class="form-button">Modifier</button>
+                    </div>
+                </section>
+            </section>
+        </div>
         <section id="filter-wrapper">
             {% include 'filters/filters.html.twig' %}
+        </section>
             <div class="main-title">
                 <h2 class="add-structure-title">Structures</h2>
                 <a href="/staff/franchise:{{ franchise.getId }}/create_structure">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="#c4dfaa" d="M16 4c6.6 0 12 5.4 12 12s-5.4 12-12 12S4 22.6 4 16S9.4 4 16 4m0-2C8.3 2 2 8.3 2 16s6.3 14 14 14s14-6.3 14-14S23.7 2 16 2z"/>
+                    <svg class="add-franchise" xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="#c4dfaa" d="M16 4c6.6 0 12 5.4 12 12s-5.4 12-12 12S4 22.6 4 16S9.4 4 16 4m0-2C8.3 2 2 8.3 2 16s6.3 14 14 14s14-6.3 14-14S23.7 2 16 2z"/>
                         <path fill="#c4dfaa" d="M24 15h-7V8h-2v7H8v2h7v7h2v-7h7z"/>
                     </svg>
+                    <button type="button" class="add-franchise-btn">Ajouter +</button>
                 </a>
             </div>
-        </section>
         {% if structures %}
             <div id="content">
                 {% include 'structure/_structure_card.html.twig'%}
@@ -144,6 +146,5 @@
     <script src="{{ asset('js/onLoad.js') }}"></script>
     <script src="{{ asset('js/radioButtonFilter.js') }}"></script>
     <script src="{{ asset('js/searchBarFilter.js') }}"></script>
-    <script src="{{ asset('js/checkActiveStatut.js') }}"></script>
     <script src="{{ asset('js/modalTrigger.js') }}"></script>
 {% endblock %}

@@ -19,16 +19,12 @@
     <div class="main-title">
         <h1>Les Franchises</h1>
         <a href="/staff/create_franchise">
-            <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="#c4dfaa" d="M16 4c6.6 0 12 5.4 12 12s-5.4 12-12 12S4 22.6 4 16S9.4 4 16 4m0-2C8.3 2 2 8.3 2 16s6.3 14 14 14s14-6.3 14-14S23.7 2 16 2z"/>
+            <svg class="add-franchise" xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="#c4dfaa" d="M16 4c6.6 0 12 5.4 12 12s-5.4 12-12 12S4 22.6 4 16S9.4 4 16 4m0-2C8.3 2 2 8.3 2 16s6.3 14 14 14s14-6.3 14-14S23.7 2 16 2z"/>
                 <path fill="#c4dfaa" d="M24 15h-7V8h-2v7H8v2h7v7h2v-7h7z"/>
             </svg>
+            <button type="button" class="add-franchise-btn">Ajouter +</button>
         </a>
     </div>
-    <h2>
-        {% if isFirstConnexion %}
-            <h2>Première connexion bravo !</h2>
-        {% endif %}
-    </h2>
     <div id="content">
         {% include 'franchise/_card.html.twig'%}
     </div>

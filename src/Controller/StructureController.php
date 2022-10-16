@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Franchise;
 use App\Entity\Structure;
+use App\Form\StructurePermissionsType;
 use App\Form\StructureType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -39,6 +40,25 @@ class StructureController extends AbstractController
       return $this->redirectToRoute('staff_structure');
     }
 
+    $structureForm = $this->createForm(StructurePermissionsType::class);
+    $structureForm->handleRequest($request);
+
+    if($structureForm->isSubmitted() && $structureForm) {
+      if(isset($_POST['structureId'])) {
+        $currentStructure = $structureRepo->findOneBy(['id'=> $_POST['structureId']]);
+
+        $currentStructure->setSellDrink($structureForm->get('sell_drink')->getData());
+        $currentStructure->setManageSchedule($structureForm->get('manage_schedule')->getData());
+        $currentStructure->setCreateNewsletter($structureForm->get('create_newsletter')->getData());
+        $currentStructure->setCreateEvent($structureForm->get('create_event')->getData());
+        $currentStructure->setAddPromotion($structureForm->get('add_promotion')->getData());
+        $currentStructure->setSellFood($structureForm->get('sell_food')->getData());
+
+        $this->em->persist($currentStructure);
+        $this->em->flush();
+      }
+    }
+
     if($request->get('ajax')) {
       if($request->get('filter') === 'all') {
         $structures = $structureRepo->getAll();
@@ -55,12 +75,14 @@ class StructureController extends AbstractController
       return new JsonResponse([
         'content'=> $this->renderView('structure/_structure_card.html.twig', [
           'structures' => $structures,
+          'structureForm' => $structureForm->createView(),
         ])
       ]);
     }
 
     return $this->render('structure/structures.html.twig', [
       'structures' => $structures,
+      'structureForm' => $structureForm->createView(),
     ]);
   }
 

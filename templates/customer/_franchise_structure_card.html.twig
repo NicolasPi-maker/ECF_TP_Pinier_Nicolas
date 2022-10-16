@@ -1,106 +1,111 @@
 {% for structure in structures %}
-    <section class="main-wrapper">
-        <article class="structure-main-info">
-            <img src="{{asset('uploads/import/'~ structure.logo_url )}}" alt="franchise logo branding" class="structure-logo">
-            <div class="structure-text">
-                <h3>{{ structure.structure_name }}</h3>
-                <p class="franchise_address">{{ structure.structure_address }}</p>
-                <p>{{ structure.manager_name}}</p>
-                <a href="{{ structure.url }}">{{ structure.url}}</a>
-            </div>
-        </article>
-        <article class="franchise-more-info">
-            <div class="form-input slider-block">
-                <label class="switch">
-                    <input type="checkbox" class="switch global btn-update-structure" value="{{ structure.is_active }}" id="{{ structure.id }}" disabled>
-                    <span class="slider round"></span>
-                </label>
-            </div>
-        </article>
-    </section>
-    <section class="franchise-permissions">
-        <div class="structure-perms-title">
-            <div class="structure-perms-header">
-                <h3>Permissions</h3>
-                <div>
-                    <svg class="less-perms" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20">
-                        <path fill="currentColor" d="M10 1c-5 0-9 4-9 9s4 9 9 9s9-4 9-9s-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7s7 3.1 7 7s-3.1 7-7 7zM6 9v2h8V9H6z" class="st0"/>
-                    </svg>
+    <div class="franchise-wrapper">
+
+        <section class="main-wrapper">
+            <article class="structure-main-info">
+                <img src="{{asset('uploads/import/'~ structure.logo_url )}}" alt="franchise logo branding" class="structure-logo">
+                <div class="structure-text">
+                    <h3>{{ structure.structure_name }}</h3>
+                    <p class="franchise_address">{{ structure.structure_address }}</p>
+                    <p>{{ structure.manager_name}}</p>
+                    <a href="{{ structure.url }}">{{ structure.url}}</a>
                 </div>
-                <div>
-                    <svg class="more-perms" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="currentColor" d="M16 4c6.6 0 12 5.4 12 12s-5.4 12-12 12S4 22.6 4 16S9.4 4 16 4m0-2C8.3 2 2 8.3 2 16s6.3 14 14 14s14-6.3 14-14S23.7 2 16 2z"/>
-                        <path fill="currentColor" d="M24 15h-7V8h-2v7H8v2h7v7h2v-7h7z"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <article class="structure-perms-toggle">
-            <div class="form-field form-permissions">
-                <div class="form-label">
-                    <label for="sell_drink">Vente de boisson</label>
-                </div>
+            </article>
+            <article class="franchise-more-info">
                 <div class="form-input slider-block">
                     <label class="switch">
-                        <input type="checkbox" value="{{ structure.sell_drink }}" class="global" name="sell_drink" disabled>
+                        <input type="checkbox" class="switch global btn-update-structure" value="{{ structure.is_active }}" id="{{ structure.id }}" disabled>
                         <span class="slider round"></span>
                     </label>
                 </div>
-            </div>
-            <div class="form-field form-permissions">
-                <div class="form-label">
-                    <label for="manage_schedule">Gestion du planning</label>
-                </div>
-                <div class="form-input slider-block">
-                    <label class="switch">
-                        <input type="checkbox" value="{{ structure.manage_schedule }}" class="global" name="manage_schedule" disabled>
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="form-field form-permissions">
-                <div class="form-label">
-                    <label for="create_newsletter">Création de Newsletter</label>
-                </div>
-                <div class="form-input slider-block">
-                    <label class="switch">
-                        <input type="checkbox" value="{{ structure.create_newsletter }}" class="global" name="create_newsletter" disabled>
-                        <span class="slider round"></span>
-                    </label>
+            </article>
+        </section>
+        <section class="franchise-permissions">
+            <div class="structure-perms-title">
+                <div class="structure-perms-header">
+                    <h3>Permissions</h3>
+                    <div>
+                        <svg class="less-perms" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20">
+                            <path fill="currentColor" d="M10 1c-5 0-9 4-9 9s4 9 9 9s9-4 9-9s-4-9-9-9zm0 16c-3.9 0-7-3.1-7-7s3.1-7 7-7s7 3.1 7 7s-3.1 7-7 7zM6 9v2h8V9H6z" class="st0"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <svg class="more-perms" xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path fill="currentColor" d="M16 4c6.6 0 12 5.4 12 12s-5.4 12-12 12S4 22.6 4 16S9.4 4 16 4m0-2C8.3 2 2 8.3 2 16s6.3 14 14 14s14-6.3 14-14S23.7 2 16 2z"/>
+                            <path fill="currentColor" d="M24 15h-7V8h-2v7H8v2h7v7h2v-7h7z"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
-            <div class="form-field form-permissions">
-                <div class="form-label">
-                    <label for="add_promotion">Créer une promotion</label>
+            <article class="structure-perms-toggle">
+                <div class="structure-perms-form">
+                    <div class="form-field form-permissions">
+                        <div class="form-label">
+                            <label for="sell_drink">Vente de boisson</label>
+                        </div>
+                        <div class="form-input slider-block">
+                            <label class="switch">
+                                <input type="checkbox" value="{{ structure.sell_drink }}" class="global" name="sell_drink" disabled>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-field form-permissions">
+                        <div class="form-label">
+                            <label for="manage_schedule">Gestion du planning</label>
+                        </div>
+                        <div class="form-input slider-block">
+                            <label class="switch">
+                                <input type="checkbox" value="{{ structure.manage_schedule }}" class="global" name="manage_schedule" disabled>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-field form-permissions">
+                        <div class="form-label">
+                            <label for="create_newsletter">Création de Newsletter</label>
+                        </div>
+                        <div class="form-input slider-block">
+                            <label class="switch">
+                                <input type="checkbox" value="{{ structure.create_newsletter }}" class="global" name="create_newsletter" disabled>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-field form-permissions">
+                        <div class="form-label">
+                            <label for="add_promotion">Créer une promotion</label>
+                        </div>
+                        <div class="form-input slider-block">
+                            <label class="switch">
+                                <input type="checkbox" value="{{ structure.add_promotion }}" class="global" name="add_promotion" disabled>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-field form-permissions">
+                        <div class="form-label">
+                            <label for="create_event">Créer un évenement</label>
+                        </div>
+                        <div class="form-input slider-block">
+                            <label class="switch">
+                                <input type="checkbox" value="{{ structure.create_event }}" class="global" name="create_event" disabled>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-field form-permissions">
+                        <div class="form-label">
+                            <label for="sell_food">Vendre de la nouriture</label>
+                        </div>
+                        <div class="form-input slider-block">
+                            <label class="switch">
+                                <input type="checkbox" value="{{ structure.sell_food }}" class="global" name="sell_food" disabled>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-input slider-block">
-                    <label class="switch">
-                        <input type="checkbox" value="{{ structure.add_promotion }}" class="global" name="add_promotion" disabled>
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="form-field form-permissions">
-                <div class="form-label">
-                    <label for="create_event">Créer un évenement</label>
-                </div>
-                <div class="form-input slider-block">
-                    <label class="switch">
-                        <input type="checkbox" value="{{ structure.create_event }}" class="global" name="create_event" disabled>
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-            </div>
-            <div class="form-field form-permissions">
-                <div class="form-label">
-                    <label for="sell_food">Vendre de la nouriture</label>
-                </div>
-                <div class="form-input slider-block">
-                    <label class="switch">
-                        <input type="checkbox" value="{{ structure.sell_food }}" class="global" name="sell_food" disabled>
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-            </div>
-        </article>
-    </section>
+            </article>
+        </section>
+    </div>
 {% endfor %}

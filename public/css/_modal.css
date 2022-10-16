@@ -65,6 +65,7 @@
 }
 
 .form-button, #close-global-perms {
+  transition: ease-in-out .4s;
   width: 50%;
   height: 2em;
   border-radius: 50px;
@@ -74,6 +75,14 @@
   color: whitesmoke;
   font-weight: bold;
   margin: 1em;
+  cursor: pointer;
+}
+
+.close-button:hover, .close-delete:hover, .close-update-structure-perms:hover {
+  transition: ease-in-out .2s;
+  color: #ff6348;
+  border: solid 2px #ff6348;
+  background-color: white;
 }
 
 .form-button > a {
@@ -82,7 +91,9 @@
 }
 
 .close-button, .close-delete, #close-global-perms, .close-update-structure-perms {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #ff6348;
 }
 
@@ -104,13 +115,23 @@
 }
 
 .input-active {
+  transition: ease-in-out .4s;
   background-color: #c4dfaa;
   font-size: 1em;
   color: white;
   border: none;
   font-weight: bold;
   width: 100%;
-  border-radius: 50px;
+  border-radius: 25px;
+  cursor: pointer;
+  height: 2em;
+}
+
+.input-active:hover, .confirm-update-form:hover {
+  transition: ease-in-out .2s;
+  color: #c4dfaa;
+  border: solid 2px #c4dfaa;
+  background-color: white;
 }
 
 .btn-confirm-delete, .btn-confirm-perms, .confirm-update-form {
@@ -119,4 +140,30 @@
 
 #btn-global-perms {
   display: none;
+}
+
+/* ipad landscape breakpoint */
+@media screen and (min-width: 1180px) {
+  /* Modal Content/Box */
+  .modal-content {
+    width: 40%; /* Could be more or less, depending on screen size */
+  }
+
+  .modal-text {
+    font-size: 1.25em;
+  }
+
+  .form-button, #close-global-perms {
+    width: 30%;
+    height: 2em;
+    font-size: 1.25em;
+  }
+}
+
+/* desktop breakpoint */
+@media screen and (min-width: 1460px) {
+  /* Modal Content/Box */
+  .modal-content {
+    width: 25%; /* Could be more or less, depending on screen size */
+  }
 }

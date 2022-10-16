@@ -17,13 +17,14 @@
 }
 
 #checkbox-filter > * {
-  margin: 1em;
+  margin: 1em 0.5em;
   display: flex;
   align-items: center;
   font-size: 1.25em;
 }
 
 #search-filter {
+  position: relative;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -33,7 +34,7 @@
   font-size: 2em;
   border-radius: 35px;
   width: 100%;
-  height: 2em;
+  height: 2.25em;
   padding: 0.25em;
 }
 
@@ -46,7 +47,94 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1em;
+  margin-top: 2em;
+}
+
+.main-title > a {
+  margin-top: 0.5em;
+  text-decoration: none;
+}
+
+h1 {
+  margin-right: 0.5em;
+}
+
+.add-franchise {
+  margin: 0;
+}
+
+.add-franchise-btn {
+  display: none;
+}
+
+/* ipad landscape breakpoint */
+@media screen and (min-width: 1180px) {
+
+  #checkbox-filter > * {
+    font-size: 0.8em;
+    margin-bottom: 0.5em;
+  }
+
+  #filter {
+    width: 1.5em;
+    height: 1.5em;
+    margin: 1em;
+  }
+
+  #search-filter {
+    width: 55%;
+    margin-left: 1em;
+  }
+
+  #search-filter > input {
+    font-size: 1em;
+    height: 2em;
+  }
+
+  .main-title {
+    justify-content: flex-start;
+  }
+
+  h1 {
+    font-size: 2em;
+    margin: 0 0.5em 0 1em;
+  }
+
+  .add-franchise {
+    display: none;
+  }
+
+  .add-franchise-btn {
+    display: flex;
+    transition: ease-in-out .4s;
+    font-size: 1.25em;
+    border: solid 2px #c4dfaa;
+    border-radius: 35px;
+    color: #c4dfaa;
+    font-weight: bold;
+    background-color: white;
+    padding: 0.15em 1em;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .add-franchise-btn:hover {
+    transition: ease-in-out .2s;
+    background-color: #c4dfaa;
+    color: white;
+  }
+
+  #content {
+    justify-content: flex-start;
+  }
+
+  /* desktop breakpoint */
+  @media screen and (min-width: 1460px) {
+
+    #search-filter {
+      width: 37%;
+    }
+  }
 }
 
 

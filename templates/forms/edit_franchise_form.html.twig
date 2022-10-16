@@ -91,7 +91,9 @@
                     }) }}
                 </div>
                 <div class="form-input message">
-                    {{ form_widget(form.full_description)}}
+                    {{ form_widget(form.full_description, {'attr': {
+                        'class' : 'message'
+                    }})}}
                 </div>
             </div>
             <div class="logo-section">

@@ -9,8 +9,20 @@
 {% block body %}
 <header>
     <div class="branding-logo">
-        <img src="{{ asset('uploads/assets/branding_logo.jpg') }}" alt="welcome background image" class="branding-logo"/>
-        JustSport
+        {% if app.user.roles[0] == 'ROLE_ADMIN' %}
+        <a href="{{ path('staff') }}">
+            <img src="{{ asset('uploads/assets/branding_logo.jpg') }}" alt="welcome background image" class="branding-logo"/>
+        </a>
+        {% elseif app.user.roles[0] == 'ROLE_FRANCHISE' %}
+        <a href="{{ path('franchise') }}">
+            <img src="{{ asset('uploads/assets/branding_logo.jpg') }}" alt="welcome background image" class="branding-logo"/>
+        </a>
+        {% else %}
+        <a href="{{ path('structure') }}">
+            <img src="{{ asset('uploads/assets/branding_logo.jpg') }}" alt="welcome background image" class="branding-logo"/>
+        </a>
+        {% endif %}
+        <p>JustSport</p>
     </div>
     {% if app.user %}
     <nav>

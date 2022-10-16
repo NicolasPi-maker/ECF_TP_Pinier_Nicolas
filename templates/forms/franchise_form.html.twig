@@ -89,11 +89,13 @@
             <div class="form-field">
                 <div class="form-label">
                     {{ form_label(form.full_description, null, {
-                        label: 'Description longue'
+                        label: 'Description longue',
                     }) }}
                 </div>
                 <div class="form-input">
-                    {{ form_widget(form.full_description) }}
+                    {{ form_widget(form.full_description, {'attr': {
+                        'class' : 'message'
+                    }}) }}
                 </div>
             </div>
             <div class="form-field">

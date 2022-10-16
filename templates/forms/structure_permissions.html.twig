@@ -7,95 +7,97 @@
         </div>
         <div class="form-input slider-block">
             <label class="switch">
-                {{ form_widget(structureForm.sell_drink, {'attr': {'class': 'isActive'}})}}
+                <input type="checkbox" class="global isActive" name="{{ field_name(structureForm.sell_drink) }}" value="{{ structure.sell_drink }}">
                 <span class="slider round"></span>
             </label>
         </div>
     </div>
-    <div class="form-field form-permissions">
-        <div class="form-label">
-            {{ form_label(structureForm.manage_schedule, null, {
-                label: 'Gestion du planning'
-            }) }}
-        </div>
-        <div class="form-input slider-block">
-            <label class="switch">
-                {{ form_widget(structureForm.manage_schedule, {'attr': {'class': 'isActive'}})}}
-                <span class="slider round"></span>
-            </label>
-        </div>
+<div class="form-field form-permissions">
+    <div class="form-label">
+        {{ form_label(structureForm.manage_schedule, null, {
+            label: 'Gestion du planning'
+        }) }}
     </div>
-    <div class="form-field form-permissions">
-        <div class="form-label">
-            {{ form_label(structureForm.create_newsletter, null, {
-                label: 'Création de Newsletter'
-            }) }}
-        </div>
-        <div class="form-input slider-block">
-            <label class="switch">
-                {{ form_widget(structureForm.create_newsletter, {'attr': {'class': 'isActive'}})}}
-                <span class="slider round"></span>
-            </label>
-        </div>
+    <div class="form-input slider-block">
+        <label class="switch">
+            <input type="checkbox" class="global isActive" name="{{ field_name(structureForm.manage_schedule) }}" value="{{ structure.manage_schedule }}">
+            <span class="slider round"></span>
+        </label>
     </div>
-    <div class="form-field form-permissions">
-        <div class="form-label">
-            {{ form_label(structureForm.add_promotion, null, {
-                label: 'Créer une promotion'
-            }) }}
-        </div>
-        <div class="form-input slider-block">
-            <label class="switch">
-                {{ form_widget(structureForm.add_promotion, {'attr': {'class': 'isActive'}})}}
-                <span class="slider round"></span>
-            </label>
-        </div>
+</div>
+<div class="form-field form-permissions">
+    <div class="form-label">
+        {{ form_label(structureForm.create_newsletter, null, {
+            label: 'Création de Newsletter'
+        }) }}
     </div>
-    <div class="form-field form-permissions">
-        <div class="form-label">
-            {{ form_label(structureForm.create_event, null, {
-                label: 'Créer un évenement'
-            }) }}
-        </div>
-        <div class="form-input slider-block">
-            <label class="switch">
-                {{ form_widget(structureForm.create_event, {'attr': {'class': 'isActive'}})}}
-                <span class="slider round"></span>
-            </label>
-        </div>
+    <div class="form-input slider-block">
+        <label class="switch">
+            <input type="checkbox" class="global isActive" name="{{ field_name(structureForm.create_newsletter) }}" value="{{ structure.create_newsletter }}">
+            <span class="slider round"></span>
+        </label>
     </div>
-    <div class="form-field form-permissions">
-        <div class="form-label">
-            {{ form_label(structureForm.sell_food, null, {
-                label: 'Vendre de la nouriture'
-            }) }}
-        </div>
-        <div class="form-input slider-block">
-            <label class="switch">
-                {{ form_widget(structureForm.sell_food, {'attr': {'class': 'isActive'}})}}
-                <span class="slider round"></span>
-            </label>
-        </div>
+</div>
+<div class="form-field form-permissions">
+    <div class="form-label">
+        {{ form_label(structureForm.add_promotion, null, {
+            label: 'Créer une promotion'
+        }) }}
     </div>
-    <!-- The Modal to confirm submit -->
-    <div class="update-structure-perms-modal">
+    <div class="form-input slider-block">
+        <label class="switch">
+            <input type="checkbox" class="global isActive" name="{{ field_name(structureForm.add_promotion) }}" value="{{ structure.add_promotion }}">
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>
+<div class="form-field form-permissions">
+    <div class="form-label">
+        {{ form_label(structureForm.create_event, null, {
+            label: 'Créer un évenement'
+        }) }}
+    </div>
+    <div class="form-input slider-block">
+        <label class="switch">
+            <input type="checkbox" class="global isActive" name="{{ field_name(structureForm.create_event) }}" value="{{ structure.create_event }}">
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>
+<div class="form-field form-permissions">
+    <div class="form-label">
+        {{ form_label(structureForm.sell_food, null, {
+            label: 'Vendre de la nourriture'
+        }) }}
+    </div>
+    <div class="form-input slider-block">
+        <label class="switch">
+            <input type="checkbox" class="global isActive" name="{{ field_name(structureForm.sell_food) }}" value="{{ structure.sell_food }}">
+            <span class="slider round"></span>
+        </label>
+    </div>
+</div>
+<!-- The Modal to confirm submit -->
+<div class="update-structure-perms-modal">
 
-        <!-- Modal content -->
-        <div class="modal-content">
-            <p class="modal-text">
-                Souhaitez vous confirmer les modifications de la structure
-                <span class="modal-structure-name">{{ structure.getStructureName}} </span>
-                <a href="{{ structure.getUrl }}">({{ structure.getUrl }})</a>
-            </p>
-            <div class="button-wrapper">
-                <button class="form-button confirm-update-form" type="submit">
-                    Modifier
-                </button>
-                    <p class="form-button close-update-structure-perms">Annuler</p>
-            </div>
+    <!-- Modal content -->
+    <div class="modal-content">
+        <p class="modal-text">
+            Souhaitez vous confirmer les modifications de la structure
+            <span class="modal-structure-name">{{ structure.structure_name}} </span>
+            <a href="{{ structure.url }}">({{ structure.url }})</a>
+        </p>
+        <input type="hidden" name="structureId" value="{{ structure.id }}">
+        <div class="button-wrapper">
+            <button class="form-button confirm-update-form" type="submit">
+                Modifier
+            </button>
+            <p class="form-button close-update-structure-perms">Annuler</p>
         </div>
     </div>
+</div>
 {{ form_end(structureForm) }}
-    <div class="button-wrapper">
-        <button class="form-button open-structure-perms-modal" type="button">Modifier</button>
-    </div>
+
+<div class="button-wrapper">
+    <button class="form-button open-structure-perms-modal" type="button">Modifier</button>
+</div>

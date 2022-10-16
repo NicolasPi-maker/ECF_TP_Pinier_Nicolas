@@ -46,7 +46,7 @@ window.onclick = () => {
     if(openStructurePerms) {
         for(let i=0; i < structurePerms.length; i++) {
             openStructurePerms[i].addEventListener('click', () => {
-                structurePerms[i].style.display = "block";
+                structurePerms[i].style.display = "flex";
                 openStructurePerms[i].style.display = "none";
                 closeStructurePerms[i].style.display = "block";
             })
@@ -136,4 +136,5 @@ window.onclick = () => {
         })
     }
 }
+
 

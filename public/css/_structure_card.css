@@ -39,6 +39,10 @@ article {
   font-size: 1.75em;
 }
 
+.structure-desktop-perm-title {
+  display: none;
+}
+
 .structure-perms-toggle {
   transition: ease-in-out 0.4s;
 }
@@ -55,4 +59,140 @@ article {
 
 .structure-perms-title > * {
   margin-right: 1em;
+}
+
+.edit-structure, .delete-structure  {
+  position: absolute;
+  top: 15px;
+}
+
+.delete-structure {
+  right: 15px;
+}
+
+.edit-structure {
+  right: 100px;
+}
+
+.structure-edit-btn, .structure-delete-btn {
+  display: none;
+}
+
+
+/* ipad landscape breakpoint */
+@media screen and (min-width: 1180px) {
+
+  .structure-logo {
+    width: 150px;
+    height: 150px;
+    margin-right: 0;
+  }
+
+  .structure-text {
+    font-size: 1em;
+  }
+
+  .edit-structure, .delete-structure  {
+    display: none;
+  }
+
+  .structure-edit-btn, .structure-delete-btn {
+    font-size: 1em;
+    transition: ease-in-out .4s;
+    display: flex;
+    position: absolute;
+    top: 20px;
+    border-radius: 25px;
+    padding: 0.5em 1.25em;
+    background-color: white;
+    font-weight: bold;
+    border: 2px solid;
+    cursor: pointer;
+  }
+
+  .structure-delete-btn {
+    right: 30px;
+    color: #df9a9a;
+    border-color: #df9a9a;
+  }
+
+  .structure-edit-btn {
+    right: 180px;
+    color: #eccc68;
+    border-color: #eccc68;
+  }
+
+  .franchise-permissions {
+    margin: 1.5em 0.7em;
+  }
+
+  .structure-perms-title {
+    font-size: 1em;
+  }
+
+  .structure-perms-toggle {
+    flex-direction: column;
+  }
+
+  .structure-perms-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+/* desktop breakpoint */
+@media screen and (min-width: 1460px) {
+  .structure-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .main-wrapper {
+    min-width: 55vw;
+    margin: 1.5em 0.7em;
+  }
+
+  .franchise-more-info {
+    margin-top: 2em;
+  }
+
+  .structure-desktop-perm-title {
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    font-size: 1.25em;
+  }
+
+  .structure-perms-title {
+    display: none;
+  }
+
+  .structure-perms-form {
+    justify-content: center;
+  }
+
+  .structure-perms-toggle {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+
+  .structure-delete-btn:hover {
+    transition: ease-in-out .2s;
+    color: white;
+    background-color: #df9a9a;
+  }
+
+  .structure-edit-btn:hover {
+    transition: ease-in-out .2s;
+    color: white;
+    background-color: #eccc68;
+  }
+
+  .button-wrapper {
+    width: 100%;
+  }
+
 }

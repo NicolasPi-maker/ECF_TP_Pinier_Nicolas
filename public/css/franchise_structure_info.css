@@ -130,6 +130,113 @@ h2 {
   font-size: 2em;
 }
 
+/* ipad landscape breakpoint */
+@media screen and (min-width: 1180px) {
+  .franchise-logo {
+    width: 175px;
+    height: 175px;    margin-top: 1em;
+  }
+
+  #main-title {
+    font-size: 1.5em;
+  }
+
+  .franchise-url {
+    font-size: 1em;
+  }
+
+  .global-perm-title {
+    margin: 1em 1em 0;
+    font-size: 1.25em;
+  }
+
+  .franchise-main-info > * {
+    margin: 0.5em;
+  }
+
+  .contact-email > *, .customer_address > * {
+    font-size: 1em;
+  }
+
+  .full-description > * {
+    font-size: 1em;
+  }
+
+  .toggle-btn-wrapper {
+    margin: 0 1.5em 1em 0;
+  }
+
+  h2 {
+    font-size: 1em;
+    margin: 0 1em;
+  }
+
+  #form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .form-permissions {
+    font-size: 0.5em;
+    justify-content: center;
+    width: auto;
+  }
+
+  .form-label {
+    width: 215px;
+  }
+
+  .add-structure-title {
+    font-size: 2em;
+  }
+
+  #content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button-wrapper {
+    justify-content: flex-end;
+  }
+}
+
+/* desktop breakpoint */
+@media screen and (min-width: 1460px) {
+  .franchise-wrapper {
+    display: flex;
+  }
+
+  .franchise-info-wrapper {
+    width: 60vw;
+  }
+
+  .global-perm-title {
+    text-align: center;
+  }
+
+  .franchise-permissions {
+    width: 40vw;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .global-perm-title {
+    margin: 1em 1em 0;
+    font-size: 1.25em;
+  }
+
+  #form-container {
+    flex-direction: row;
+    justify-content: center;
+
+  }
+
+  .form-label {
+    width: 215px;
+  }
+}
+
 
 
 

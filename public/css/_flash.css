@@ -19,7 +19,6 @@
   color: white;
   height: 12em;
   z-index: 999;
-
 }
 
 .alert > * {
@@ -29,6 +28,10 @@
 .alert-message {
   font-size: 2.5em;
   margin-left: 0.7em;
+}
+
+.btn-close {
+  cursor: pointer;
 }
 
 .btn-close > p{
@@ -45,4 +48,28 @@
 
 .alert-danger {
   background-color: #ff6348;
+}
+
+/* ipad landscape breakpoint */
+@media screen and (min-width: 1180px) {
+  .alert {
+    height: 7em;
+    margin: 1em;
+    width: 40%;
+  }
+
+  .alert-message {
+    font-size: 1.2em;
+  }
+
+  .btn-close > p {
+    font-size: 4.5em;
+  }
+}
+
+/* desktop breakpoint */
+@media screen and (min-width: 1460px) {
+  .alert {
+    width: 25%;
+  }
 }

@@ -18,16 +18,16 @@ h1 {
 }
 
 .franchise-logo {
-  min-width: 250px;
-  min-height: 250px;
-  max-width: 250px;
-  max-height: 250px;
+  min-width: 300px;
+  min-height: 300px;
+  max-width: 300px;
+  max-height: 300px;
   border-radius: 25px;
 }
 
 .franchise-main-info {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .franchise-main-info > * {
@@ -191,6 +191,10 @@ h3, .franchise_address {
 
 /* ipad landscape breakpoint */
 @media screen and (min-width: 1180px) {
+  .franchise-text {
+    max-width: 250px;
+  }
+
   #content {
     display: flex;
     flex-wrap: wrap;
@@ -256,8 +260,8 @@ h3, .franchise_address {
 
 /* desktop breakpoint */
 @media screen and (min-width: 1460px) {
-  .main-wrapper {
-    width: 450px;
+  .franchise-text {
+    max-width: 300px;
   }
 
   .franchise-logo {

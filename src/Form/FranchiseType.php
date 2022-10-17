@@ -29,7 +29,12 @@ class FranchiseType extends AbstractType
             ])
             ->add('technical_contact', EmailType::class)
             ->add('commercial_contact', EmailType::class)
-            ->add('short_description', TextType::class)
+            ->add('short_description', TextType::class, [
+              'attr' => [
+                'maxlength' => 80,
+                'minlength' => 60,
+            ],
+            ])
             ->add('full_description', TextareaType::class)
             ->add('is_active')
             ->add('sell_drink')

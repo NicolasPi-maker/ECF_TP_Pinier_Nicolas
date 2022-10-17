@@ -73,6 +73,8 @@ form {
 }
 
 .form-button {
+  transition: ease-in-out .4s;
+  cursor: pointer;
   width: 100%;
   height: 2.5em;
   border-radius: 50px;
@@ -82,6 +84,11 @@ form {
   color: whitesmoke;
   font-weight: bold;
   margin-bottom: 2em;
+}
+
+.form-button:hover {
+  transition: ease-in-out .2s;
+  opacity: 0.8;
 }
 
 .form-permissions {
@@ -272,9 +279,9 @@ form {
   }
 
   .form-button {
-    width: 50%;
+    width: 40%;
     height: 2em;
-    font-size: 2em;
+    font-size: 1.5em;
   }
 
   .form-error {
@@ -302,5 +309,11 @@ form {
     min-width: 40vw;
     min-height: 2.25em;
     font-size: 1em;
+  }
+
+  .form-button {
+    width: 25%;
+    height: 1.75em;
+    font-size: 1.5em;
   }
 }

@@ -30,10 +30,10 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
-    public function logout()
+    #[Route(path: '/app/logout', name: 'app_logout')]
+    public function logout(): void
     {
-        return $this->redirect('app_login');
+        $this->redirectToRoute('/');
     }
 
     ### Change password function ###

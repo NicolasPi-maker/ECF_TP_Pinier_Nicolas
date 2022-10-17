@@ -10,6 +10,7 @@ let structureCards = document.getElementsByClassName("js-disabled-structure");
 let opacity = "0.5";
 let borderStyle = "dashed";
 
+
 window.onload = () => {
     document.querySelectorAll(".global").forEach((input, index) => {
         if(input.value === '1') {
@@ -43,6 +44,7 @@ window.onload = () => {
                 structurePermissions[index].style.border = borderStyle;
             }
         }
+
     })
 }
 

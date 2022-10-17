@@ -1,3 +1,5 @@
+const body = document.getElementsByTagName('body');
+
 document.querySelectorAll(".js-filter input").forEach(input => {
     input.addEventListener("change", () => {
         const Params = new URLSearchParams();

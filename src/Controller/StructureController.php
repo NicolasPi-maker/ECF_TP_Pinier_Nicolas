@@ -56,6 +56,8 @@ class StructureController extends AbstractController
 
         $this->em->persist($currentStructure);
         $this->em->flush();
+
+        return $this->redirectToRoute('staff_structure');
       }
     }
 

@@ -7,7 +7,7 @@
             <p class="modal-text">
                 Souhaitez vous supprimer la structure
                 <span class="modal-structure-name">{{ structure.structure_name}}</span>
-                <a href="{{structure.url }}">({{structure.url }})</a>
+                <a href="{{ asset(structure.url) }}">({{structure.url }})</a>
             </p>
             <div class="button-wrapper">
                 <button class="form-button btn-confirm-delete" type="submit">
@@ -54,7 +54,7 @@
                     <h3>{{ structure.structure_name }}</h3>
                     <p class="franchise_address">{{ structure.structure_address }}</p>
                     <p>{{ structure.manager_name}}</p>
-                    <a href="{{ structure.url }}">{{ structure.url}}</a>
+                    <a href="{{ asset(structure.url) }}">{{ structure.url}}</a>
                 </div>
             </article>
             <article class="franchise-more-info">

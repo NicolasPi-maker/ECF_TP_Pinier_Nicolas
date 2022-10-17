@@ -185,6 +185,11 @@ header {
   .dropdown-customer {
     min-width: 15em;
   }
+
+  /* Sidenav menu links */
+  .sidenav a {
+    font-size: 1.5em;
+  }
 }
 
 /* desktop breakpoint */

@@ -82,9 +82,12 @@ class FranchiseStructureInfoController extends AbstractController
 
         $this->em->persist($currentStructure);
         $this->em->flush();
+
+        return $this->redirectToRoute('franchise_structure_info', [
+          'id' => $id,
+        ]);
       }
     }
-
 
     if($franchiseForm->isSubmitted() && $franchiseForm->isValid()) {
 
@@ -92,6 +95,10 @@ class FranchiseStructureInfoController extends AbstractController
 
       $this->em->persist($currentFranchise);
       $this->em->flush();
+
+      return $this->redirectToRoute('franchise_structure_info', [
+        'id' => $id,
+      ]);
     }
 
     return $this->render('franchise/franchise_structure_info.html.twig', [

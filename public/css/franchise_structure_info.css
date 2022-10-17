@@ -130,6 +130,11 @@ h2 {
   font-size: 2em;
 }
 
+.structure-perms-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /* ipad landscape breakpoint */
 @media screen and (min-width: 1180px) {
   .franchise-logo {

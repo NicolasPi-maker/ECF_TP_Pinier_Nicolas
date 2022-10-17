@@ -19,7 +19,7 @@ class AdminController extends AbstractController
     $this->em = $em;
   }
 
-  #[Route(path: '/staff', name: 'staff')]
+  #[Route(path: 'app/staff', name: 'staff')]
   public function index(FranchiseRepository $franchiseRepository, Request $request): Response
   {
     $isFirstConnexion = $this->setLastConnexion();

@@ -21,7 +21,10 @@
             <!-- Modal content -->
             <div class="modal-content">
                 {% if franchise.isIsactive == 1 %}
-                <p class="modal-text">Voulez-vous confirmer la <span class="highlight-desactive">désactivation</span> de la franchise de {{ franchise.getClientName}} ? </p>
+                <div class="franchise-modal-warning-text">
+                    <p class="modal-text">Voulez-vous confirmer la <span class="highlight-desactive">désactivation</span> de la franchise de {{ franchise.getClientName}} ? </p>
+                    <p class="franchise-warning-sub-text">⚠️Cette action va entrainer la désactivation de toutes les structures de la franchise</p>
+                </div>
                 {% else %}
                 <p class="modal-text">Voulez-vous confirmer <span class="highlight-active">l'activation</span> de la franchise de {{ franchise.getClientName}} ?<p>
                     {% endif %}

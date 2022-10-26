@@ -2,12 +2,17 @@ const body = document.getElementsByTagName('body');
 
 document.querySelectorAll(".js-filter input").forEach(input => {
     input.addEventListener("change", () => {
+
+        /* set const to add dynamically input value on URLSearchParams object */
         const Params = new URLSearchParams();
 
+        /* add input value to Params const */
         Params.append('filter', input.value);
 
+        /* get current url */
         const Url = new URL(window.location.href);
 
+        /* send request with customized url */
         fetch(`${Url.pathname}?${Params.toString()}&ajax=1`, {
             headers: {
                 "X-Requested-With": "XMLHttPRequest"

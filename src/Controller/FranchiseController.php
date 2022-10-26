@@ -39,13 +39,8 @@ class FranchiseController extends AbstractController
       $logoFile = $form->get('logo_url')->getData();
       $this->logoUrlConstructor($franchise, $logoFile);
 
-      $user = $form->get('user_id')->getData();
-      $mailer->send($this->createdFranchiseMailer($user));
-
       $this->em->persist($franchise);
       $this->em->flush();
-
-      $this->addFlash('success', 'La franchise '.$franchise->getClientName().' a bien été crée');
 
       return $this->redirect($this->generateUrl('staff'));
     }
@@ -109,23 +104,7 @@ class FranchiseController extends AbstractController
     $this->em->remove($franchise);
     $this->em->flush();
 
-    $this->addFlash('danger', 'La franchise '.$franchise->getClientName().' a bien été supprimée');
-
     return $this->redirect($this->generateUrl('staff'));
-  }
-
-  public function createdFranchiseMailer($user)
-  {
-    $email = (new TemplatedEmail())
-      ->from('justsport@gmail.com')
-      ->to($user->getEmail())
-      ->subject('Vos identifants de franchise - JustSport')
-      ->htmlTemplate('email/confirm_creation.html.twig')
-      ->context([
-        'user' => $user
-      ]);
-
-    return $email;
   }
 
   #Récupère la franchise sur laquelle on souhaite modifier ses propriétées
@@ -138,8 +117,7 @@ class FranchiseController extends AbstractController
   #Format et envoie les fichiers image pour le logo au bon endroit
   public function logoUrlConstructor(Franchise $franchise, $logoFile)
   {
-
-    if($logoFile) {
+    if($logoFile && in_array($logoFile->guessExtension(), ['jpg','png'])) {
       $originalFileName = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
 
       $safeFileName = $this->slugger->slug($originalFileName);
@@ -154,6 +132,8 @@ class FranchiseController extends AbstractController
       } catch (FileException $e) {
         echo $e;
       }
+    } else {
+      $this->addFlash('danger', 'Le logo a été rejeté ! Seulement les images au format .jpg et .png sont autorisées');
     }
   }
 
@@ -165,6 +145,7 @@ class FranchiseController extends AbstractController
     $structureRepo = $this->em->getRepository(Structure::class);
     $structures = $structureRepo->getAllByCurrentFranchise($id);
 
+    # get only updated fields #
     $uow = $this->em->getUnitOfWork();
     $uow->computeChangeSets();
     $changeSet = $uow->getEntityChangeSet($currentFranchise);
@@ -172,7 +153,7 @@ class FranchiseController extends AbstractController
     foreach($structures as $structure) {
       $currentStructure = $structureRepo->findOneBy(['id'=> $structure['id']]);
 
-      # get only global changed perms #
+      # loop on each changed perms label #
       foreach($changeSet as $key => $change) {
 
         # Generate dynamically setter depends on changed perms #
@@ -184,8 +165,8 @@ class FranchiseController extends AbstractController
         $key = str_replace('_','',$key);
         $key = 'set'.$key;
 
-
-        if($change[1] === true || $change[1] === false) {
+        # $change is an array where index 0 = previous data and index 1 = new data #
+        if($change[1] !== null) {
           $currentStructure->$key($change[1]);
         }
       }

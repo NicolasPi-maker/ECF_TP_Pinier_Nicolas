@@ -36,7 +36,7 @@ class SecurityController extends AbstractController
         $this->redirectToRoute('/');
     }
 
-    ### Change password function ###
+    ### Change password ###
     #[Route(path: 'change-password/{token}', name: 'change-password')]
     public function editPassword(
       Request $request,

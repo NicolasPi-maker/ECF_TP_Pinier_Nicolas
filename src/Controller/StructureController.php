@@ -110,13 +110,6 @@ class StructureController extends AbstractController
       $logoFile = $form->get('logo_url')->getData();
       $this->logoUrlConstructor($structure, $logoFile);
 
-      $user = $form->get('user_id')->getData();
-      # Send mail to structure manager with credentials #
-      $mailer->send($this->createdStructureMailer($user));
-
-      # Send mail to linked franchise manager to notify about structure creation  #
-      $mailer->send($this->createdStructureFranchiseMailer($linkedFranchise, $structure));
-
       $entityManager = $doctrine->getManager();
 
       $structure->setFranchiseId($linkedFranchise);
@@ -129,8 +122,6 @@ class StructureController extends AbstractController
 
       $entityManager->persist($structure);
       $entityManager->flush();
-
-      $this->addFlash('success', 'La structure '.$structure->getStructureName().' a bien été crée');
 
       return $this->redirect($this->generateUrl('staff'));
     }
@@ -193,37 +184,7 @@ class StructureController extends AbstractController
     $this->em->remove($structure);
     $this->em->flush();
 
-    $this->addFlash('danger', 'La structure '.$structure->getStructureName().' a bien été supprimée');
-
     return $this->redirect($this->generateUrl('staff'));
-  }
-
-  public function createdStructureMailer($user)
-  {
-    $emailToStructure = (new TemplatedEmail())
-      ->from('justsport@gmail.com')
-      ->to($user->getEmail())
-      ->subject('Vos identifants de structure - JustSport')
-      ->htmlTemplate('email/confirm_creation.html.twig')
-      ->context([
-        'user' => $user
-      ]);
-
-    return $emailToStructure;
-  }
-
-  public function createdStructureFranchiseMailer($linkedFranchise, $structure)
-  {
-    $emailToFranchise = (new TemplatedEmail())
-      ->from('justsport@gmail.com')
-      ->to($linkedFranchise->getUserId()->getEmail())
-      ->subject('Une nouvelle structure a été créée pour votre franchise - JustSport')
-      ->htmlTemplate('email/confirm_created_structure.html.twig')
-      ->context([
-        'structure' => $structure
-      ]);
-
-    return $emailToFranchise;
   }
 
   #Récupère la structure sur laquelle on souhaite modifier ses propriétées
@@ -238,7 +199,7 @@ class StructureController extends AbstractController
   {
 
 
-    if($logoFile) {
+    if($logoFile && in_array($logoFile->guessExtension(), ['jpg','png'])) {
       $originalFileName = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
 
       $safeFileName = $this->slugger->slug($originalFileName);
@@ -253,6 +214,8 @@ class StructureController extends AbstractController
       } catch (FileException $e) {
         echo $e;
       }
+    } else {
+      $this->addFlash('danger', 'Le logo a été rejeté ! Seulement les images au format .jpg et .png sont autorisées');
     }
   }
 

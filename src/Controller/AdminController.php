@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Franchise;
+use App\Entity\Structure;
 use App\Form\FranchiseType;
 use App\Repository\FranchiseRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -60,10 +61,19 @@ class AdminController extends AbstractController
   public function updateFranchiseActive()
   {
     $franchiseRepo = $this->em->getRepository(Franchise::class);
+    $structureRepo = $this->em->getRepository(Structure::class);
 
     if(isset($_POST['franchiseId'])) {
       $currentFranchise = $franchiseRepo->findOneBy(['id' => $_POST['franchiseId']]);
       $currentFranchise->setIsActive(!$currentFranchise->isIsActive());
+      $linkedStructures = $structureRepo->findBy(['franchise_id' => $currentFranchise]);
+
+      if(!$currentFranchise->isIsActive()) {
+        foreach ($linkedStructures as $structure) {
+          $structure->setIsActive(false);
+          $this->em->persist($structure);
+        }
+      }
 
       $this->em->persist($currentFranchise);
       $this->em->flush();

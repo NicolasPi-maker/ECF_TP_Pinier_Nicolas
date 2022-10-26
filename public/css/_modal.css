@@ -55,6 +55,17 @@
   margin: 0;
 }
 
+.franchise-modal-warning-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.franchise-warning-sub-text {
+  font-weight: bold;
+}
+
 .button-wrapper {
   display: flex;
   justify-content: center;

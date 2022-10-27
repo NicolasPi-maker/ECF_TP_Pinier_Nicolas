@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
     #[Route(path: '/app/logout', name: 'app_logout')]
     public function logout(): void
     {
-        $this->redirectToRoute('/');
+        $this->redirectToRoute('app_login');
     }
 
     ### Change password ###

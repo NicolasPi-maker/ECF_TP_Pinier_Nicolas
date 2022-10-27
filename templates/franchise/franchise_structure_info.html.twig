@@ -47,7 +47,7 @@
         <section id="franchise-branding">
             <img src="{{asset('uploads/import/'~ franchise.getLogoUrl )}}" alt="franchise logo branding" class="franchise-logo">
             <h1 id="main-title">{{ franchise.getClientName }}</h1>
-            <a href="{{ asset(franchise.getUrl) }}" class="franchise-url">{{ franchise.getUrl }}</a>
+            <a href="{{ asset('redirect/'~ franchise.getUrl) }}" class="franchise-url">{{ franchise.getUrl }}</a>
         </section>
         <div class="franchise-wrapper">
             <section class="franchise-info-wrapper">
@@ -105,7 +105,7 @@
                             <div class="modal-content">
                                 <p class="modal-text">
                                     Souhaitez vous confirmer les modifications de la franchise {{ franchise.getClientName}}
-                                    <a href="{{ asset(franchise.getUrl) }}">{{ franchise.getUrl }}</a>
+                                    <a href="{{ asset('redirect/'~ franchise.getUrl) }}">{{ franchise.getUrl }}</a>
                                 </p>
                                 <div class="button-wrapper">
                                     <button class="form-button btn-confirm-perms" type="submit">

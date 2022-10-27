@@ -17,7 +17,7 @@ class FranchiseDisplayerController extends AbstractController
     $this->em = $em;
   }
 
-  #[Route(path: 'app/franchise', name: 'franchise')]
+  #[Route(path: '/franchise', name: 'franchise')]
   public function index(
     StructureRepository $structureRepo,
     FranchiseRepository $franchiseRepo,

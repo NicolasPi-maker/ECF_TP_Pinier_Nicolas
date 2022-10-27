@@ -85,7 +85,7 @@
         <p class="modal-text">
             Souhaitez vous confirmer les modifications de la structure
             <span class="modal-structure-name">{{ structure.structure_name}} </span>
-            <a href="{{ asset(structure.url) }}">({{ structure.url }})</a>
+            <a href="{{ asset('redirect/'~ structure.url) }}">({{ structure.url }})</a>
         </p>
         <input type="hidden" name="structureId" value="{{ structure.id }}">
         <div class="button-wrapper">

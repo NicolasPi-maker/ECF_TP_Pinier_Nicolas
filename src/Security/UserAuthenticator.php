@@ -57,7 +57,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
           case 'ROLE_STRUCTURE' :
             return new RedirectResponse($this->urlGenerator->generate('structure'));
           default :
-            return new RedirectResponse($this->urlGenerator->generate(''));
+            return new RedirectResponse($this->urlGenerator->generate('app_login'));
         }
     }
 

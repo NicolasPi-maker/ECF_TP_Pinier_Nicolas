@@ -45,6 +45,7 @@ article {
 
 .structure-perms-toggle {
   transition: ease-in-out 0.4s;
+  flex-direction: column;
 }
 
 .less-perms, .more-perms {

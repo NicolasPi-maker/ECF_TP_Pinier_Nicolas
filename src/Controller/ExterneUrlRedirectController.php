@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ExterneUrlRedirectController extends AbstractController
 {
-  #[Route(path: '/{url}', name: 'app_url_redirect')]
+  #[Route(path: 'redirect/{url}', name: 'app_url_redirect')]
   public function index(string $url)
   {
     return $this->redirect('https://'.$url);

@@ -20,7 +20,7 @@ class AdminController extends AbstractController
     $this->em = $em;
   }
 
-  #[Route(path: 'app/staff', name: 'staff')]
+  #[Route(path: '/staff', name: 'staff')]
   public function index(FranchiseRepository $franchiseRepository, Request $request): Response
   {
     $isFirstConnexion = $this->setLastConnexion();
@@ -84,19 +84,21 @@ class AdminController extends AbstractController
   {
     $user = $this->getUser();
 
-    if($user->getLastConnexion() !== null) {
+    if($user) {
+      if($user->getLastConnexion() !== null) {
+        $user->setLastConnexion(new \DateTime());
+
+        $this->em->persist($user);
+        $this->em->flush($user);
+
+        return false;
+      }
       $user->setLastConnexion(new \DateTime());
 
       $this->em->persist($user);
       $this->em->flush($user);
 
-      return false;
     }
-    $user->setLastConnexion(new \DateTime());
-
-    $this->em->persist($user);
-    $this->em->flush($user);
-
     return true;
   }
 }

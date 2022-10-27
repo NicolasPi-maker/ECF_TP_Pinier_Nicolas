@@ -13,7 +13,7 @@
             <p class="modal-text">
                 Souhaitez vous supprimer la franchise de
                 <span class="modal-structure-name">{{ franchise.client_name}}</span>
-                <a href="{{ asset(franchise.url) }}">({{franchise.url }})</a>
+                <a href="{{ asset('redirect/'~ franchise.url) }}">({{franchise.url }})</a>
             </p>
             <div class="button-wrapper">
                 <button class="form-button btn-confirm-delete" type="submit">
@@ -62,7 +62,7 @@
                 <h3>{{ franchise.client_name }}</h3>
                 <p class="franchise_address">{{ franchise.client_address }}</p>
                 <p>{{ franchise.short_description }}</p>
-                <a href="{{ asset(franchise.url) }}">{{ franchise.url }}</a>
+                <a href="{{ asset('redirect/'~ franchise.url) }}">{{ franchise.url }}</a>
             </div>
         </section>
         <section class="franchise-more-info">

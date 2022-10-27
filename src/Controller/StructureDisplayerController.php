@@ -14,7 +14,7 @@ class StructureDisplayerController extends AbstractController
     $this->em = $em;
   }
 
-  #[Route(path: 'app/structure', name: 'structure')]
+  #[Route(path: '/structure', name: 'structure')]
   public function index(StructureRepository $structureRepo)
   {
     $user = $this->getUser();

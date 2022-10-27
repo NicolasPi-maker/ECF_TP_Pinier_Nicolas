@@ -47,7 +47,7 @@ class StructureEventListener extends AbstractController
     try {
       $this->mailer->send($structureEmail);
       $this->mailer->send($emailToFranchise);
-      $this->addFlash('warning', 'La structure'.$structure->getStructureName().' a bien été modifiée');
+      $this->addFlash('warning', 'La structure '.$structure->getStructureName().' a bien été modifiée');
     } catch (ExceptionInterface $e) {
       throw new Exception($e);
     }
@@ -79,7 +79,7 @@ class StructureEventListener extends AbstractController
     try {
       $this->mailer->send($emailToStructure);
       $this->mailer->send($emailToFranchise);
-      $this->addFlash('success', 'La structure'.$structure->getStructureName().' a bien été créée');
+      $this->addFlash('success', 'La structure '.$structure->getStructureName().' a bien été créée');
     } catch (ExceptionInterface $e) {
       throw new Exception($e);
     }

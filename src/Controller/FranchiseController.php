@@ -166,7 +166,7 @@ class FranchiseController extends AbstractController
         $key = 'set'.$key;
 
         # $change is an array where index 0 = previous data and index 1 = new data #
-        if($change[1] !== null) {
+        if($change[1] !== null && $key !== 'setLogoUrl') {
           $currentStructure->$key($change[1]);
         }
       }

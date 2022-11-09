@@ -69,6 +69,10 @@ h3, .franchise_address {
 }
 
 /* Hide default HTML checkbox */
+.switch > input {
+  opacity: 0;
+}
+
 .switch {
   opacity: 1;
   width: 0;

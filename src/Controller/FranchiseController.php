@@ -76,7 +76,6 @@ class FranchiseController extends AbstractController
       $franchise->setLogoUrl($franchise->getLogoUrl());
 
       $this->em->persist($franchise);
-      $this->structurePermsSynchronizer($id);
 
       $this->em->flush();
 
@@ -121,7 +120,7 @@ class FranchiseController extends AbstractController
       $originalFileName = pathinfo($logoFile->getClientOriginalName(), PATHINFO_FILENAME);
 
       $safeFileName = $this->slugger->slug($originalFileName);
-      $newFileName = $safeFileName.'-'.uniqid().'.'.$logoFile->guessExtension();
+      $newFileName = $safeFileName.'-'.md5(uniqid()).'.'.$logoFile->guessExtension();
 
       try {
         $logoFile->move(
@@ -133,7 +132,7 @@ class FranchiseController extends AbstractController
         echo $e;
       }
     } else {
-      $this->addFlash('danger', 'Le logo a été rejeté ! Seulement les images au format .jpg et .png sont autorisées');
+      $this->addFlash('danger', 'Le logo a été rejeté ! Seulement les images au format .jpg et .png sont autorisées.');
     }
   }
 

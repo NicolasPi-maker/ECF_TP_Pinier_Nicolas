@@ -160,7 +160,7 @@ class StructureController extends AbstractController
       $this->em->persist($structure);
       $this->em->flush();
 
-      return $this->redirect($this->generateUrl('staff'));
+      return $this->redirect($this->generateUrl('staff_structure'));
     }
 
     return $this->render('forms/edit_structure_form.html.twig', [

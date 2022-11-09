@@ -177,6 +177,10 @@ header {
     min-height: 3em;
   }
 
+  .dropdown-content {
+    top: 45px;
+  }
+
   /* Links inside the dropdown */
   .dropdown-content a {
     font-size: 1em;
